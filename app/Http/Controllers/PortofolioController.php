@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PortofolioController extends Controller
 {
     public function index(){
-        $portofolios = Portofolio::all();
+        $portofolios = Portofolio::orderBy('updated_at', 'desc')->get();
         return view('admin.portofolio.index', compact('portofolios') );
     }
     public function create(){
@@ -23,7 +23,7 @@ class PortofolioController extends Controller
             'linkPorto'    => 'required',
             'image'    => 'required|image',
             'additional_description'    => 'nullable|string',
-            'completed'    => 'nullable',
+            'completed' => 'nullable|string',
         ]);
         if ($request->hasFile('image')){
             $prt = new Portofolio();
@@ -35,7 +35,11 @@ class PortofolioController extends Controller
             $request->file('image')->move('portofolio-images/',$request->file('image')->getClientOriginalName());
             $prt->image = $request->file('image')->getClientOriginalName();
             $prt->additional_description = $request->additional_description;
-            $prt->completed = $request->completed;
+            if ($request->completed == null) {
+                $prt->completed = 'Still Developed';
+            }else{
+                $prt->completed = $request->completed;
+            }
             $prt->save();
         }
 
@@ -55,23 +59,27 @@ class PortofolioController extends Controller
             'rating'    => 'required|numeric',
             'client'    => 'required|string',
             'linkPorto'    => 'required',
-            'image'    => 'required|image',
+            'image'    => 'nullable|image',
             'additional_description'    => 'nullable|string',
-            'completed'    => 'nullable',
+            'completed'    => 'nullable|string',
         ]);
+        $prt = Portofolio::find($id);
+        $prt->title = $request->title;
+        $prt->description = $request->description;
+        $prt->rating = $request->rating;
+        $prt->client = $request->client;
+        $prt->linkPorto = $request->linkPorto;
         if ($request->hasFile('image')){
-            $prt = Portofolio::find($id);
-            $prt->title = $request->title;
-            $prt->description = $request->description;
-            $prt->rating = $request->rating;
-            $prt->client = $request->client;
-            $prt->linkPorto = $request->linkPorto;
             $request->file('image')->move('portofolio-images/',$request->file('image')->getClientOriginalName());
             $prt->image = $request->file('image')->getClientOriginalName();
-            $prt->additional_description = $request->additional_description;
-            $prt->completed = $request->completed;
-            $prt->update();
         }
+        $prt->additional_description = $request->additional_description;
+        if ($request->completed == null) {
+            $prt->completed = 'Still Developed';
+        }else{
+            $prt->completed = $request->completed;
+        }
+        $prt->update();
 
         session()->flash('message','Portofolio has been updated');
         return redirect(route('portofolio.index'));

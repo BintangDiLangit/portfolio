@@ -15,7 +15,7 @@ class WelcomeController extends Controller
     }
 
     public function indexPortofolio(){
-        $portofolios = Portofolio::all();
+        $portofolios = Portofolio::orderBy('updated_at', 'desc')->get();
         return view('portofolio.index', compact('portofolios'));
     }
     public function show($id){
@@ -25,7 +25,7 @@ class WelcomeController extends Controller
     }
 
     public function indexAchievement(){
-        $achievements = Certificate::all();
+        $achievements = Certificate::orderBy('created_at', 'desc')->get();
         return view('certif.index', compact('achievements'));
     }
 }

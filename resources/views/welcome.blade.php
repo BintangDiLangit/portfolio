@@ -54,13 +54,12 @@
                             Introduce about <br>
                             myself</h2>
                         <p>
-                            Whose given. Were gathered. There first subdue greater. Bearing you Whales heaven
-                            midst their. Beast creepeth. Fish days.
+                            I am a student, who focuses on the backend field, and continue to develop my skills to
+                            become a fullstack developer.
                         </p>
                         <p>
-                            Is give may shall likeness made yielding spirit a itself together created after sea
-                            is in beast beginning signs open god you're gathering whose gathered cattle let.
-                            Creature whales fruit unto meat the life beginning all in under give two.
+                            I also provide website creation services. I am also active on linked in, medium, and create
+                            content about cyber security, linux, CTF, programming on my youtube channel
                         </p>
                         <a class="primary_btn" href="#contact"><span>Reach me</span></a>
                     </div>
@@ -78,8 +77,8 @@
                     <div class="main_title">
                         <h2>skills </h2>
                         <p>
-                            Is give may shall likeness made yielding spirit a itself togeth created
-                            after sea <br> is in beast beginning signs open god you're gathering ithe
+                            I have skills in programming, both wa and car. And I also have skills in the field of Cyber
+                            ​​Security. This can be proven from my portfolio and certificate list
                         </p>
                     </div>
                 </div>
@@ -89,28 +88,34 @@
                     <div class="feature_item">
                         <img src="{{ asset('../satner/img/services/s1.png') }}" alt="">
                         <h4>Laravel Web Developing</h4>
-                        <p>Creeping for female light years that lesser can't evening heaven isn't bearing tree</p>
+                        <p>
+                            have done several projects solo and in teams using laravels 6 and 8. And from those
+                            projects, most of them I lead.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="feature_item">
                         <img src="{{ asset('../satner/img/services/s22.png') }}" alt="">
                         <h4>Ruby on Rails Web Developing</h4>
-                        <p>Creeping for female light years that lesser can't evening heaven isn't bearing tree</p>
+                        <p>Create some projects like a simple Tweet App with ruby ​​on rails</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="feature_item">
                         <img src="{{ asset('../satner/img/services/s5.png') }}" alt="">
                         <h4>NodeJs Web Developing</h4>
-                        <p>Creeping for female light years that lesser can't evening heaven isn't bearing tree</p>
+                        <p>There was once a node js-based website project, this project is the result of the final
+                            training project from progate, and there are also several other projects that are still in
+                            the development stage.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="feature_item">
                         <img src="{{ asset('../satner/img/services/s4.png') }}" alt="">
                         <h4>fast learning</h4>
-                        <p>Creeping for female light years that lesser can't evening heaven isn't bearing tree</p>
+                        <p>
+                            My speed in learning can be proven by my track record which is on linked in. And this is
+                            evident when I learn something new, I understand it before anyone else.</p>
                     </div>
                 </div>
             </div>
@@ -125,10 +130,7 @@
                 <div class="col-lg-8 text-center">
                     <div class="main_title">
                         <h2>client say about me</h2>
-                        <p>Is give may shall likeness made yielding spirit a itself togeth created after sea is in beast
-                            <br>
-                            beginning signs open god you're gathering ithe
-                        </p>
+                        <p>the following positive feedback given by some of my clients.</p>
                     </div>
                 </div>
             </div>

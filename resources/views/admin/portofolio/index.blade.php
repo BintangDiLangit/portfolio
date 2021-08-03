@@ -1,3 +1,6 @@
+@section('title')
+    Portofolio
+@endsection
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -13,6 +16,7 @@
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Title</th>
+                            <th scope="col">Created At</th>
                             <th scope="col">Link</th>
                             <th scope="col">Image</th>
                             <th scope="col">Action</th>
@@ -23,6 +27,7 @@
                             <tr>
                                 <th scope="row"> {{ $loop->iteration }} </th>
                                 <td> {{ $porto->title }} </td>
+                                <td> {{ $porto->updated_at }} </td>
                                 <td>
                                     <a href="{{ $porto->linkPorto }}" class="badge badge-info">Link</a>
                                 </td>

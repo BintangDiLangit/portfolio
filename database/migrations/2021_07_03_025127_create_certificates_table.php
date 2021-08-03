@@ -18,6 +18,7 @@ class CreateCertificatesTable extends Migration
             $table->string('name');
             $table->string('imgCert');
             $table->string('linkCert')->nullable();
+            $table->enum('type',['security','software','softskill'])->nullable();
             $table->timestamps();
         });
     }

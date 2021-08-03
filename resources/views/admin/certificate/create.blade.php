@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
+@section('title')
+    Add Certificate
+@endsection
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -27,6 +27,15 @@
                             <input type="text" class="form-control" id="exampleFormControlInput1"
                                 placeholder="paste link here" name="linkCert" value="{{ old('linkCert') }}">
                             @error('linkCert') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Certificate Type <span></label>
+                            <select name="type" id="" class="form-control">
+                                <option value="security">Security</option>
+                                <option value="software">Software</option>
+                                <option value="softskill">Softskill</option>
+                            </select>
+                            @error('type') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Upload Certificate</label>
