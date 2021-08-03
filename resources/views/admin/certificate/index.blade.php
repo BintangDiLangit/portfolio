@@ -16,6 +16,7 @@
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Certificate Name</th>
+                            <th scope="col">Certificate Type</th>
                             <th scope="col">Credential Link</th>
                             <th scope="col">Image</th>
                             <th scope="col">Action</th>
@@ -26,6 +27,7 @@
                             <tr>
                                 <th scope="row"> {{ $loop->iteration }} </th>
                                 <td> {{ $cert->name }} </td>
+                                <td> {{ $cert->type }} </td>
                                 <td>
                                     @if ($cert->linkCert != 0)
                                         <a href="{{ $cert->linkCert }}" class="badge badge-info">Link</a>

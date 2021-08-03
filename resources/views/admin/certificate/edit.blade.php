@@ -30,6 +30,34 @@
                             @error('linkCert') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">
+                            <label for="exampleFormControlInput1">Certificate Type <span></label>
+                            <select name="type" id="" class="form-control">
+                                @if ($cert->type == 'softskill')
+                                    <option value="">Choose Type</option>
+                                    <option value="security">Security</option>
+                                    <option value="software">Software</option>
+                                    <option selected value="softskill">Softskill</option>
+                                @elseif ($cert->type == 'security')
+                                    <option value="">Choose Type</option>
+                                    <option selected value="security">Security</option>
+                                    <option value="software">Software</option>
+                                    <option value="softskill">Softskill</option>
+                                @elseif ($cert->type == 'software')
+                                    <option value="">Choose Type</option>
+                                    <option value="security">Security</option>
+                                    <option selected value="software">Software</option>
+                                    <option value="softskill">Softskill</option>
+                                @else
+                                    <option selected value="">Choose Type</option>
+                                    <option value="security">Security</option>
+                                    <option value="software">Software</option>
+                                    <option value="softskill">Softskill</option>
+                                @endif
+
+                            </select>
+                            @error('type') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="form-group">
                             <label for="exampleFormControlInput1">Upload Certificate</label>
                             @error('imgCert') <span class="text-red-500">{{ $message }}</span>@enderror
                             <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>

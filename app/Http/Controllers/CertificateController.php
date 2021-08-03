@@ -22,11 +22,13 @@ class CertificateController extends Controller
             'name'    => 'required|string|max:100|min:5',
             'imgCert'    => 'required|image',
             'linkCert'    => 'nullable',
+            'type'    => 'required',
         ]);
         if ($request->hasFile('imgCert')){
             $crt = new Certificate();
             $crt->name = $request->name;
             $crt->linkCert = $request->linkCert;
+            $crt->type = $request->type;
             $request->file('imgCert')->move('certificate-images/',$request->file('imgCert')->getClientOriginalName());
             $crt->imgCert = $request->file('imgCert')->getClientOriginalName();
             $crt->save();
@@ -44,17 +46,19 @@ class CertificateController extends Controller
     {
         $this->validate(request(), [
             'name'    => 'required|string|max:100|min:5',
-            'imgCert'    => 'required|image',
+            'imgCert'    => 'nullable|image',
             'linkCert'    => 'nullable|string',
+            'type'    => 'required',
         ]);
+        $crt = Certificate::find($id);
+        $crt->name = $request->name;
+        $crt->linkCert = $request->linkCert;
+        $crt->type = $request->type;
         if ($request->hasFile('imgCert')){
-            $crt = Certificate::find($id);
-            $crt->name = $request->name;
-            $crt->linkCert = $request->linkCert;
             $request->file('imgCert')->move('certificate-images/',$request->file('imgCert')->getClientOriginalName());
             $crt->imgCert = $request->file('imgCert')->getClientOriginalName();
-            $crt->update();
         }
+            $crt->update();
         session()->flash('message','Certificate has been updated');
         return redirect(route('certificate.index'));
 

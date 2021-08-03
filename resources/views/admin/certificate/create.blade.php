@@ -31,6 +31,7 @@
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Certificate Type <span></label>
                             <select name="type" id="" class="form-control">
+                                <option value="">Choose Type</option>
                                 <option value="security">Security</option>
                                 <option value="software">Software</option>
                                 <option value="softskill">Softskill</option>
