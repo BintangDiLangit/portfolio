@@ -41,9 +41,10 @@ class WelcomeController extends Controller
     public function showBlog($title){
         $latest = Blog::orderBy('updated_at', 'desc')->limit(5)->get();
         $blog = Blog::where('link_route', $title)->first();
+        $countLatest = $latest->count();
         $mytime = Carbon::now();
         $result = array();
-        for ($i=0; $i < 5; $i++) {
+        for ($i=0; $i < $countLatest; $i++) {
             $updateTime = $latest[$i]->updated_at;
             $time = \Carbon\Carbon::parse($updateTime)->diff(\Carbon\Carbon::now());
             # code...
