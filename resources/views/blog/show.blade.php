@@ -62,7 +62,7 @@
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">Latest Posts</h3>
-                            @for ($i = 0; $i < 5; $i++)
+                            @for ($i = 0; $i < $countLatest; $i++)
                                 <div class="media post_item">
                                     <img width="100px" height="60px"
                                         src="{{ asset('../blog-images/' . $latest[$i]->imageHeader) }}" alt="post">

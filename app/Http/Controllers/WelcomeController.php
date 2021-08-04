@@ -34,8 +34,9 @@ class WelcomeController extends Controller
 
     public function indexBlog(){
         $latest = Blog::orderBy('updated_at', 'desc')->limit(3)->get();
+        $countLatest = $latest->count();
         $blogs = Blog::orderBy('updated_at', 'desc')->simplePaginate(2);
-        return view('blog.index', compact('blogs', 'latest'));
+        return view('blog.index', compact('blogs', 'latest','countLatest'));
     }
     public function showBlog($title){
         $latest = Blog::orderBy('updated_at', 'desc')->limit(5)->get();

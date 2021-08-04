@@ -88,9 +88,6 @@
                             {{ $blogs->firstItem() }}
                             to
                             {{ $blogs->lastItem() }}
-                            of
-                            {{ $blogs->perPage() }}
-                            results
                         </div>
                         <div class="pull-right">
                             {!! $blogs->links() !!}
