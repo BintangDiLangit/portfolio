@@ -61,7 +61,7 @@
                                     <div class="blog_info text-right">
                                         <ul class="blog_meta list">
                                             <li><a href="#">Bintang Miftaqul Huda<i class="lnr lnr-user"></i></a></li>
-                                            <li><a href="#">{{ $blg->created_at }}<i
+                                            <li><a href="#">{{ $blg->updated_at }}<i
                                                         class="lnr lnr-calendar-full"></i></a></li>
                                         </ul>
                                     </div>
@@ -71,7 +71,7 @@
                                         <img width="555px" height="280px"
                                             src="{{ asset('../blog-images/' . $blg->imageHeader) }}" alt="">
                                         <div class="blog_details">
-                                            <a href="single-blog.html">
+                                            <a href="{{ route('blg.show', ['title' => $blg->link_route]) }}">
                                                 <h2>{{ $blg->title }}</h2>
                                             </a>
                                             <p>{!! substr_replace($blg->content, '...', 100) !!}</p>
@@ -108,18 +108,20 @@
                             <div class="br"></div>
                         </aside>
                         <aside class="single_sidebar_widget author_widget">
-                            <img class="author_img rounded-circle" src="img/blog/author.png" alt="">
+                            <img class="author_img rounded-circle" height="120px"
+                                src="{{ asset('../satner/img/blog/author2.png') }}" alt="">
                             <h4>Bintang Miftaqul Huda</h4>
                             <p>Blog writer</p>
                             <div class="social_icon">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-github"></i></a>
-                                <a href="#"><i class="fa fa-behance"></i></a>
+                                <a href="https://www.linkedin.com/in/bintangmfhd/"><i class="fa fa-linkedin"></i></a>
+                                <a href="https://github.com/BintangDiLangit"><i class="fa fa-github"></i></a>
+                                <a href="https://bintangmfhd.medium.com/"><i class="fa fa-medium"></i></a>
+                                <a href="https://www.instagram.com/bintangmf_hd/"><i class="fa fa-instagram"></i></a>
                             </div>
-                            <p>Boot camps have its supporters andit sdetractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get. Boot camps have itssuppor ters
-                                andits detractors.</p>
+                            <p>Stories of experiences and journeys that i write on this blog.
+                                I got a lot of knowledge. My goal is to write on this blog so that I don't forget and
+                                can be real evidence.
+                            </p>
                             <div class="br"></div>
                         </aside>
                     </div>

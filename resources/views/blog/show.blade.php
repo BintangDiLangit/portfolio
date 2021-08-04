@@ -41,7 +41,8 @@
                             <div class="blog_info text-right">
                                 <ul class="blog_meta list">
                                     <li><a href="#">Bintang Miftaqul Huda<i class="lnr lnr-user"></i></a></li>
-                                    <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
+                                    <li><a href="#">{{ $blog->updated_at }}<i class="lnr lnr-calendar-full"></i></a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
