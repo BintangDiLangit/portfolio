@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Certificate;
 use App\Models\Client;
 use App\Models\Portofolio;
-use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class WelcomeController extends Controller
 {
@@ -30,4 +31,33 @@ class WelcomeController extends Controller
         $softskill = Certificate::where('type', 'softskill')->orderBy('updated_at', 'desc')->get();
         return view('certif.index', compact('software','security','softskill'));
     }
+
+    public function indexBlog(){
+        $latest = Blog::orderBy('updated_at', 'desc')->limit(3)->get();
+        $blogs = Blog::orderBy('updated_at', 'desc')->simplePaginate(2);
+        return view('blog.index', compact('blogs', 'latest'));
+    }
+    public function showBlog($title){
+        $latest = Blog::orderBy('updated_at', 'desc')->limit(5)->get();
+        $blog = Blog::where('link_route', $title)->first();
+        $mytime = Carbon::now();
+        $result = array();
+        for ($i=0; $i < 5; $i++) {
+            $updateTime = $latest[$i]->updated_at;
+            $time = \Carbon\Carbon::parse($updateTime)->diff(\Carbon\Carbon::now());
+            # code...
+            if ($time->format('%y') == '0' && $time->format('%m') == '0' && $time->format('%d') == '0') {
+                array_push($result,$time->format('%h hours %i minutes'));
+            }elseif ($time->format('%y') == '0' && $time->format('%m') == '0') {
+                array_push($result,$time->format('$d days %h hours'));
+            }elseif ($time->format('%y') == '0') {
+                array_push($result,$time->format('$m months $d days'));
+            }elseif ($time->format('%y') != '0') {
+                array_push($result,$time->format('$y years $m months'));
+            }
+        }
+        // dd($result);
+        return view('blog.show', compact('blog','latest','result'));
+    }
+
 }

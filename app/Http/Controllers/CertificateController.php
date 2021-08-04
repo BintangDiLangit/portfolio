@@ -9,7 +9,7 @@ class CertificateController extends Controller
 {
     public function index()
     {
-        $certificates = Certificate::orderBy('created_at', 'desc')->get();
+        $certificates = Certificate::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.certificate.index', compact('certificates'));
     }
     public function create()

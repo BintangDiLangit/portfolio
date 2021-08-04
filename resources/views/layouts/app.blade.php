@@ -22,6 +22,7 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
     <link rel="stylesheet" href="{{ asset('../css/cert.css') }}">
+    @stack('head_script')
 </head>
 
 <body class="font-sans antialiased">
@@ -60,6 +61,7 @@
     @livewireScripts
 
     <script src="{{ asset('../js/cert.js') }}"></script>
+    @stack('bot_script')
 
 </body>
 

@@ -1,10 +1,10 @@
 @section('title')
-    Certificate List
+    Blog
 @endsection
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            All Certificate
+            All Blog
         </h2>
     </x-slot>
 
@@ -15,47 +15,32 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Certificate Name</th>
-                            <th scope="col">Certificate Type</th>
-                            <th scope="col">Credential Link</th>
-                            <th scope="col">Image</th>
+                            <th scope="col">Title</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($certificates as $cert)
+                        @foreach ($blog as $blg)
                             <tr>
                                 <th scope="row"> {{ $loop->iteration }} </th>
-                                <td> {{ $cert->name }} </td>
-                                <td> {{ $cert->type }} </td>
+                                <td> {{ $blg->title }} </td>
                                 <td>
-                                    @if ($cert->linkCert != 0)
-                                        <a href="{{ $cert->linkCert }}" class="badge badge-info">Link</a>
-                                    @else
-                                        <p class="text-danger">Credential Link Not Found</p>
-                                    @endif
-                                </td>
-                                <td>
-                                    <img style="width: 100px"
-                                        src="{{ asset('../certificate-images/' . $cert->imgCert) }}">
-                                </td>
-                                <td>
-                                    <a href="{{ route('certificate.edit', ['certificate' => $cert]) }}"
-                                        class="btn btn-primary"><i class="fa fa-pencil"></i> Edit </a>
-                                    <a href="{{ route('certificate.destroy', ['certificate' => $cert]) }}"
-                                        type="button" class="btn btn-danger" data-toggle="modal"
-                                        data-target="#deleteConf{{ $cert->id }}"><i class="fa fa-trash"></i>
+                                    <a href="{{ route('blog.edit', ['blog' => $blg]) }}" class="btn btn-primary"><i
+                                            class="fa fa-pencil"></i> Edit </a>
+                                    <a href="{{ route('blog.destroy', ['blog' => $blg]) }}" type="button"
+                                        class="btn btn-danger" data-toggle="modal"
+                                        data-target="#deleteConf{{ $blg->id }}"><i class="fa fa-trash"></i>
                                         Delete
                                     </a>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="deleteConf{{ $cert->id }}" tabindex="-1"
+                                    <div class="modal fade" id="deleteConf{{ $blg->id }}" tabindex="-1"
                                         role="dialog" aria-labelledby="deleteConfLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="deleteConfLabel">
-                                                        Delete Certificate</h5>
+                                                        Delete Blog</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">x</span>
@@ -68,8 +53,7 @@
                                                     <button class="btn btn-link" data-dismiss="modal">
                                                         Cancel
                                                     </button>
-                                                    <form
-                                                        action="{{ route('certificate.destroy', ['certificate' => $cert]) }}"
+                                                    <form action="{{ route('blog.destroy', ['blog' => $blg]) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('delete')
@@ -84,9 +68,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-center">
-                    {!! $certificates->links() !!}
-                </div>
             </div>
         </div>
     </div>

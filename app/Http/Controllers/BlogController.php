@@ -7,79 +7,75 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $blog = Blog::orderBy('created_at', 'desc')->get();
+        return view('admin.blog.index', compact('blog'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.blog.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'title'    => 'required|string',
+            'imageHeader'    => 'required|image',
+            'content'    => 'required',
+        ]);
+        $a = strtolower($request->title);
+        $b = str_replace(' ','-',$a);
+
+        if ($request->hasFile('imageHeader')) {
+            $blg = new Blog();
+            $blg->title = $request->title;
+            $blg->content = $request->content;
+            $blg->link_route = $b;
+            $request->file('imageHeader')->move('blog-images/',$request->file('imageHeader')->getClientOriginalName());
+            $blg->imageHeader = $request->file('imageHeader')->getClientOriginalName();
+            $blg->save();
+        }
+
+        session()->flash('message','Blog has been created');
+        return redirect(route('blog.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Blog $blog)
+    public function edit($id)
     {
-        //
+        $blog = Blog::where('id', $id)->first();
+        return view('admin.blog.edit', compact('blog'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Blog $blog)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(), [
+            'title'    => 'required|string',
+            'imageHeader'    => 'nullable|image',
+            'content'    => 'required',
+        ]);
+        $a = strtolower($request->title);
+        $b = str_replace(' ','-',$a);
+
+        $blg = Blog::find($id);
+        $blg->title = $request->title;
+        $blg->link_route = $b;
+        $blg->content = $request->content;
+        if ($request->hasFile('imageHeader')) {
+            $request->file('imageHeader')->move('blog-images/',$request->file('imageHeader')->getClientOriginalName());
+            $blg->imageHeader = $request->file('imageHeader')->getClientOriginalName();
+        }
+        $blg->update();
+
+        session()->flash('message','Blog has been updated');
+        return redirect(route('blog.index'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Blog $blog)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Blog $blog)
-    {
-        //
+        $blg = Blog::find($id);
+        $blg->delete();
+        return redirect(route('blog.index'));
     }
 }
