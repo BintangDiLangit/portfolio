@@ -34,7 +34,7 @@
                             <img src="{{ asset('../blog-images/' . $blg->imageHeader) }}" alt="post">
                             <div class="categories_details">
                                 <div class="categories_text">
-                                    <a href="single-blog.html">
+                                    <a href="{{ 'blog/' . $blg->link_route }}">
                                         <h5>{{ $blg->title }}</h5>
                                     </a>
                                     <div class="border_line"></div>
