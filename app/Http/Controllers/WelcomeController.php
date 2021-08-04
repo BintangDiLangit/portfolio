@@ -59,7 +59,7 @@ class WelcomeController extends Controller
             }
         }
         // dd($result);
-        return view('blog.show', compact('blog','latest','result'));
+        return view('blog.show', compact('blog','latest','result','countLatest'));
     }
 
 }
