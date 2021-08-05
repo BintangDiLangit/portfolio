@@ -74,14 +74,14 @@
 
         <!-- Github Link -->
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="githubLink" value="{{ __('Github') }}" />
+            <x-jet-label for="githubLink" value="{{ __('Github (https://github.com/)*') }}" />
             <x-jet-input id="githubLink" type="text" class="mt-1 block w-full" wire:model.defer="state.githubLink" />
             <x-jet-input-error for="githubLink" class="mt-2" />
         </div>
 
         <!-- LinkedIn Link -->
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="linkedinLink" value="{{ __('Linkedin') }}" />
+            <x-jet-label for="linkedinLink" value="{{ __('Linkedin (https://www.linkedin.com/in/)*') }}" />
             <x-jet-input id="linkedinLink" type="text" class="mt-1 block w-full"
                 wire:model.defer="state.linkedinLink" />
             <x-jet-input-error for="linkedinLink" class="mt-2" />
@@ -89,7 +89,7 @@
 
         <!-- Instagram Link -->
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="igLink" value="{{ __('Instagram') }}" />
+            <x-jet-label for="igLink" value="{{ __('Instagram (https://www.instagram.com/)*') }}" />
             <x-jet-input id="igLink" type="text" class="mt-1 block w-full" wire:model.defer="state.igLink" />
             <x-jet-input-error for="igLink" class="mt-2" />
         </div>

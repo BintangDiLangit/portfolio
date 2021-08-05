@@ -9,6 +9,8 @@ use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
+use function PHPUnit\Framework\isEmpty;
+
 class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 {
     /**
@@ -32,8 +34,6 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         $contLinked = Str::contains($input['linkedinLink'], 'https://www.linkedin.com/in/');
         $contIg = Str::contains($input['igLink'], 'https://www.instagram.com/');
 
-
-
         if (isset($input['photo'])) {
             $user->updateProfilePhoto($input['photo']);
         }
@@ -48,26 +48,41 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'bio' => $input['bio'],
             ])->save();
 
-            $handling = [];
-            if ($contGit || $contIg == null) {
+            if ($contGit) {
                 $user->forceFill([
                     'githubLink' => $input['githubLink'],
                 ])->save();
-            }else if($contGit != null){
+            }else if($input['githubLink'] == null){
+                $user->forceFill([
+                    'githubLink' => null,
+                ])->save();
+            }else if($contGit == false){
                 throw ValidationException::withMessages(['githubLink' => 'This value is not valid']);
             }
-            if ($contLinked || $contIg == null) {
+
+            if ($contLinked) {
                 $user->forceFill([
                     'linkedinLink' => $input['linkedinLink'],
                 ])->save();
-            }else if($contLinked != null){
+            }else if($input['linkedinLink'] == null){
+                $user->forceFill([
+                    'linkedinLink' => null,
+                ])->save();
+            }else if($contLinked == false){
                 throw ValidationException::withMessages(['linkedinLink' => 'This value is not valid']);
             }
-            if ($contIg || $contIg == null) {
+
+            if ($contIg) {
                 $user->forceFill([
                     'igLink' => $input['igLink'],
                 ])->save();
-            }else if($contIg != null){
+
+            }else if($input['igLink'] == null){
+                $user->forceFill([
+                    'igLink' => null,
+                ])->save();
+            }
+            else if($contIg == false){
                 throw ValidationException::withMessages(['igLink' => 'This value is not valid']);
             }
         }
