@@ -17,9 +17,8 @@ class UserController extends Controller
     public function show($id){
         $timeNow = Carbon::now()->format('d M, Y');
         $user = User::where('id', $id)->first();
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadHTML(view('appreciation.certificate', compact('timeNow','user')));
-        return $pdf->stream();
+        $pdf = PDF::loadView('appreciation.certificate', compact('timeNow','user'));
+        return $pdf->stream($user->name.'_certificate.pdf');
     }
 
 
