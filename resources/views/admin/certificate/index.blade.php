@@ -85,7 +85,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
-                    {{ $certificates->links() }}
+                    {{ $certificates->onEachSide(5)->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>

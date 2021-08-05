@@ -32,9 +32,9 @@ class WelcomeController extends Controller
 
     public function indexAchievement()
     {
-        $software = Certificate::where('type', 'software')->orderBy('updated_at', 'desc')->paginate(10)->onEachSide(3);
-        $security = Certificate::where('type', 'security')->orderBy('updated_at', 'desc')->paginate(10)->onEachSide(3);
-        $softskill = Certificate::where('type', 'softskill')->orderBy('updated_at', 'desc')->paginate(10)->onEachSide(3);
+        $software = Certificate::where('type', 'software')->orderBy('updated_at', 'desc')->paginate(10)->onEachSide(10);
+        $security = Certificate::where('type', 'security')->orderBy('updated_at', 'desc')->paginate(10)->onEachSide(10);
+        $softskill = Certificate::where('type', 'softskill')->orderBy('updated_at', 'desc')->paginate(10)->onEachSide(10);
         return view('certif.index', compact('software', 'security', 'softskill'));
     }
 
