@@ -156,7 +156,7 @@
                         <div class="testi_item">
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <img style="author_img rounded-circle width: 135px!important; height: 135px; border-radius:50%"
+                                    <img style="width: 135px!important; height: 135px!important; border-radius:50%"
                                         src="{{ asset('storage/' . $ctb->profile_photo_path) }}" alt="">
                                 </div>
                                 <div class="col-lg-8">
