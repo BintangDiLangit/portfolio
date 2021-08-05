@@ -138,7 +138,7 @@
     <div
         style="position:absolute;left:50%;margin-left:-420px;top:0px;width:841px;height:595px;border-style:outset;overflow:hidden">
         <div style="position:absolute;left:0px;top:0px">
-            <img src="{{ asset('appreciation/beginner_writer/coa.jpg') }}"
+            <img src="https://bintangmfhd.tech/formatCert"
                 width=841 height=595>
         </div>
         <div style="position:absolute;left:196.52px;top:74.00px" class="cls_002"><span class="cls_002">CERTIFICATE OF
@@ -152,7 +152,7 @@
                 class="cls_006">Beginner Writer</span><span class="cls_005"> of "bintangmfhd.tech/blog".</span></div>
         <div style="position:absolute;left:158.28px;top:376.04px" class="cls_007"><span class="cls_007">Completed on
                 {{ $timeNow }}</span></div>
-        <div style="position:absolute;left:212.28px;top:403.04px" class="cls_007"><img src="{{ asset('appreciation/beginner_writer/ttd_qr.png') }}" width=90 alt=""></div>
+        <div style="position:absolute;left:212.28px;top:403.04px" class="cls_007"><img src="https://bintangmfhd.tech/ttd" width=90 alt=""></div>
         <div style="position:absolute;left:179.25px;top:497.05px" class="cls_007"><span class="cls_007">Bintang Miftaqul
                 Huda</span></div>
         <div style="position:absolute;left:185.52px;top:520.07px" class="cls_008"><span class="cls_008">Owner
