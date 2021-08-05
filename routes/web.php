@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CVController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PortofolioController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::group(['middleware'=>'isAdmin'],function(){
     Route::resource('admin/portofolio',PortofolioController::class)->middleware('auth');
     Route::resource('admin/certificate',CertificateController::class)->middleware('auth');
     Route::resource('admin/client',ClientController::class)->middleware('auth');
+    Route::resource('admin/user',UserController::class)->middleware('auth');
     Route::prefix('/admin/cv')->group(function (){
         Route::get('/',[CVController::class,'index'])->name('cv.index')->middleware('auth');;
         Route::post('/',[CVController::class,'store'])->name('cv.store')->middleware('auth');;
