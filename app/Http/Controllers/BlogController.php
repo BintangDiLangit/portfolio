@@ -83,8 +83,6 @@ class BlogController extends Controller
         $blg->title = $request->title;
         $blg->link_route = $b;
         $blg->content = $request->content;
-        $blg->creator = Auth::user()->name;
-        $blg->user_id = Auth::user()->id;
         if ($request->hasFile('imageHeader')) {
             $request->file('imageHeader')->move('blog-images/',$request->file('imageHeader')->getClientOriginalName());
             $blg->imageHeader = $request->file('imageHeader')->getClientOriginalName();
