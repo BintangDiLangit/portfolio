@@ -46,8 +46,8 @@
             </div>
             <div class="filters-content">
                 <div class="row portfolio-grid justify-content-center">
-                    @foreach ($security as $sec)
-                        <div class="col-lg-4 col-md-6 all popular">
+                    <div class="col-lg-4 col-md-6 all popular">
+                        @foreach ($security as $sec)
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
                                     <img class="img-fluid w-100"
@@ -67,11 +67,11 @@
                                     @endif
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                         {{ $security->links() }}
-                    @endforeach
-                    @foreach ($software as $sfw)
-                        <div class="col-lg-4 col-md-6 all following">
+                    </div>
+                    <div class="col-lg-4 col-md-6 all following">
+                        @foreach ($software as $sfw)
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
                                     <img class="img-fluid w-100"
@@ -91,11 +91,11 @@
                                     @endif
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                         {{ $software->links() }}
-                    @endforeach
-                    @foreach ($softskill as $sft)
-                        <div class="col-lg-4 col-md-6 all upcoming">
+                    </div>
+                    <div class="col-lg-4 col-md-6 all upcoming">
+                        @foreach ($softskill as $sft)
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
                                     <img class="img-fluid w-100"
@@ -115,9 +115,9 @@
                                     @endif
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                         {{ $softskill->links() }}
-                    @endforeach
+                    </div>
                 </div>
             </div>
         </div>
