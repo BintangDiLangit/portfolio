@@ -156,13 +156,27 @@
                         <div class="testi_item">
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <img style="width: 135px!important; height: 180px;"
+                                    <img style="width: 135px!important; height: 135px;"
                                         src="{{ asset('storage/' . $ctb->profile_photo_path) }}" alt="">
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="testi_text">
                                         <h4>{{ $ctb->name }}</h4>
                                         <p>{{ $ctb->bio }}</p>
+                                        <div class="social_icon">
+                                            @if ($ctb->linkedinLink != null)
+                                                <a href="{{ $ctb->linkedinLink }}"><i class="fa fa-linkedin"
+                                                        style="color:blue"></i></a>
+                                            @endif
+                                            @if ($ctb->linkedinLink != null)
+                                                <a href="{{ $ctb->githubLink }}"><i class="fa fa-github"
+                                                        style="color:black"></i></a>
+                                            @endif
+                                            @if ($ctb->linkedinLink != null)
+                                                <a href="{{ $ctb->igLink }}"><i class="fa fa-instagram"
+                                                        style="color:red"></i></a>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>

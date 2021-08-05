@@ -25,7 +25,7 @@ class DashboardController extends Controller
         }else if($blogUser > 50){
             $achievement = 'Senior Writer';
         }else{
-            $achievement = 'Not a Contributor';
+            $achievement = "Let's write now";
         }
         return view('dashboard', compact('blogAll', 'blogUser','tags','achievement'));
     }
