@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'title','content','imageHeader','link_route'
-    ];
+    protected $guarder = [];
+
+    public function author(){
+        return $this->belongsTo(User::class);
+    }
+    public function tags(){
+        return $this->belongsToMany(Tag::class, 'blog_tag', 'blog_id', 'tag_id');
+    }
+
 }

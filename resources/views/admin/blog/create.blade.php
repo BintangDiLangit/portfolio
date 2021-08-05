@@ -52,6 +52,11 @@
                         <div class="form-group">
                             <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Tags</label>
+                            <input type="text" placeholder="separate by comma" class="form-control" name="tags"
+                                value={{ old('tags', '') }}>
+                        </div>
 
                         <button type="submit" class="btn btn-success float-right mb-3">Save</button>
                     </form>

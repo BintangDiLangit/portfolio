@@ -57,7 +57,18 @@
                             <textarea rows="50" name="content"
                                 class="form-control my-editor">{!! old('content', $blog->content ?? '') !!}</textarea>
                         </div>
+                        <div class="form-group">
+                            @if ($blog->tags() == null)
+                                <label for="exampleFormControlInput1">No Tags</label>
+                            @else
+                                @foreach ($blog->tags as $bl)
+                                    <label for="exampleFormControlInput1">[{{ $bl->tag_name }}]</label>
+                                @endforeach
+                            @endif
+
+                        </div>
                         <button type="submit" class="btn btn-success float-right mb-3">Update</button>
+                        <a class="btn btn-danger float-right mb-3 mr-2" href="{{ route('blog.index') }}">Cancel</a>
                     </form>
                 </div>
             </div>

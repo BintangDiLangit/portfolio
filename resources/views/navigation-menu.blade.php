@@ -10,20 +10,30 @@
                     </a>
                 </div>
 
+
+
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                 </div>
+                @if (Auth::user()->is_admin)
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('dashboard.admin') }}"
+                            :active="request()->routeIs('dashboard-admin')">
+                            Dashboard Admin
+                        </x-jet-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('cv.index') }}" :active="request()->routeIs('cv.index')">
+                            Curriculum Vitae
+                        </x-jet-nav-link>
+                    </div>
+                @endif
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('welcome') }}" :active="request()->routeIs('welcome')">
                         Landing Page
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('cv.index') }}" :active="request()->routeIs('cv.index')">
-                        Curriculum Vitae
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -111,89 +121,92 @@
                         </x-slot>
                     </x-jet-dropdown>
                 </div>
-                <div class="ml-3 relative mr-3">
-                    <x-jet-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button
-                                class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                {{-- <img class="h-8 w-8 rounded-full object-cover"
+
+                @if (Auth::user()->is_admin)
+                    <div class="ml-3 relative mr-3">
+                        <x-jet-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button
+                                    class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                    {{-- <img class="h-8 w-8 rounded-full object-cover"
                                     src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" /> --}}
-                                Portofolio
-                            </button>
-                        </x-slot>
+                                    Portofolio
+                                </button>
+                            </x-slot>
 
-                        <x-slot name="content">
-                            <!-- Portofolio Management -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                Manage Portofolio
-                            </div>
+                            <x-slot name="content">
+                                <!-- Portofolio Management -->
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    Manage Portofolio
+                                </div>
 
-                            <x-jet-dropdown-link href="{{ route('portofolio.index') }}">
-                                All Portofolio
-                            </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('portofolio.index') }}">
+                                    All Portofolio
+                                </x-jet-dropdown-link>
 
-                            <x-jet-dropdown-link href="{{ route('portofolio.create') }}">
-                                Add Portofolio
-                            </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('portofolio.create') }}">
+                                    Add Portofolio
+                                </x-jet-dropdown-link>
 
-                            <div class="border-t border-gray-100"></div>
-                        </x-slot>
-                    </x-jet-dropdown>
-                </div>
-                <div class="ml-3 relative mr-3">
-                    <x-jet-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button
-                                class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                Certificates
-                            </button>
-                        </x-slot>
+                                <div class="border-t border-gray-100"></div>
+                            </x-slot>
+                        </x-jet-dropdown>
+                    </div>
+                    <div class="ml-3 relative mr-3">
+                        <x-jet-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button
+                                    class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                    Certificates
+                                </button>
+                            </x-slot>
 
-                        <x-slot name="content">
-                            <!-- Certificate Management -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                Manage Certificates
-                            </div>
+                            <x-slot name="content">
+                                <!-- Certificate Management -->
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    Manage Certificates
+                                </div>
 
-                            <x-jet-dropdown-link href="{{ route('certificate.index') }}">
-                                All Certificate
-                            </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('certificate.index') }}">
+                                    All Certificate
+                                </x-jet-dropdown-link>
 
-                            <x-jet-dropdown-link href="{{ route('certificate.create') }}">
-                                Add Certificate
-                            </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('certificate.create') }}">
+                                    Add Certificate
+                                </x-jet-dropdown-link>
 
-                            <div class="border-t border-gray-100"></div>
-                        </x-slot>
-                    </x-jet-dropdown>
-                </div>
-                <div class="ml-3 relative mr-3">
-                    <x-jet-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button
-                                class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                Message Clients
-                            </button>
-                        </x-slot>
+                                <div class="border-t border-gray-100"></div>
+                            </x-slot>
+                        </x-jet-dropdown>
+                    </div>
+                    <div class="ml-3 relative mr-3">
+                        <x-jet-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button
+                                    class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                    Message Clients
+                                </button>
+                            </x-slot>
 
-                        <x-slot name="content">
-                            <!-- Client Message Management -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                Manage Client Message
-                            </div>
+                            <x-slot name="content">
+                                <!-- Client Message Management -->
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    Manage Client Message
+                                </div>
 
-                            <x-jet-dropdown-link href="{{ route('client.index') }}">
-                                All Message
-                            </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('client.index') }}">
+                                    All Message
+                                </x-jet-dropdown-link>
 
-                            <x-jet-dropdown-link href="{{ route('client.create') }}">
-                                Add Message
-                            </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('client.create') }}">
+                                    Add Message
+                                </x-jet-dropdown-link>
 
-                            <div class="border-t border-gray-100"></div>
-                        </x-slot>
-                    </x-jet-dropdown>
-                </div>
+                                <div class="border-t border-gray-100"></div>
+                            </x-slot>
+                        </x-jet-dropdown>
+                    </div>
+                @endif
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
                     <x-jet-dropdown align="right" width="48">
