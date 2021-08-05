@@ -134,14 +134,15 @@
     </section>
     <!--================End Blog Area =================-->
 
+
     <!--================ Contributor Area =================-->
-    <div class="testimonial_area section_gap_bottom" id="testimoni">
+    <div class="testimonial_area section_gap_bottom mt-5" id="testimoni">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
                     <div class="main_title">
-                        <h2>client say about me</h2>
-                        <p>the following positive feedback given by some of my clients.</p>
+                        <h2>Contributors</h2>
+                        <p>the contributors who contribute to writing on this blog</p>
                     </div>
                 </div>
             </div>
