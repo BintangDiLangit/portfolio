@@ -32,9 +32,9 @@ class WelcomeController extends Controller
 
     public function indexAchievement()
     {
-        $software = Certificate::where('type', 'software')->orderBy('updated_at', 'desc')->simplePaginate(10)->onEachSide(10);
-        $security = Certificate::where('type', 'security')->orderBy('updated_at', 'desc')->simplePaginate(10)->onEachSide(10);
-        $softskill = Certificate::where('type', 'softskill')->orderBy('updated_at', 'desc')->simplePaginate(10)->onEachSide(10);
+        $software = Certificate::where('type', 'software')->orderBy('created_at', 'desc')->get();
+        $security = Certificate::where('type', 'security')->orderBy('created_at', 'desc')->get();
+        $softskill = Certificate::where('type', 'softskill')->orderBy('created_at', 'desc')->get();
         return view('certif.index', compact('software', 'security', 'softskill'));
     }
 
@@ -56,7 +56,7 @@ class WelcomeController extends Controller
         for ($i=0; $i < $countLatest; $i++) {
             $updateTime = $latest[$i]->updated_at;
             $time = \Carbon\Carbon::parse($updateTime)->diff(\Carbon\Carbon::now());
-            # code...
+
             if ($time->format('%y') == '0' && $time->format('%m') == '0' && $time->format('%d') == '0') {
                 array_push($result, $time->format('%h hours %i minutes'));
             } elseif ($time->format('%y') == '0' && $time->format('%m') == '0') {
