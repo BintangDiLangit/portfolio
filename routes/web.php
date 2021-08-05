@@ -12,6 +12,12 @@ use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('/certifApr', function(){
+    return view('appreciation.certificate');
+});
+Route::get('/ttd', function(){
+    return view('appreciation.ttd');
+});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

@@ -31,7 +31,7 @@ class BlogController extends Controller
         $a = strtolower($request->title);
         $b = str_replace(' ','-',$a);
 
-        $tags_arr = explode(',', $request["tags"]);
+        $tags_arr = explode(',', strtolower($request["tags"]));
 
         $tag_ids = [];
         foreach($tags_arr as $tag_name){
