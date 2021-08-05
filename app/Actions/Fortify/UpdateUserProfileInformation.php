@@ -49,21 +49,21 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             ])->save();
 
             $handling = [];
-            if ($contGit) {
+            if ($contGit || $contIg == null) {
                 $user->forceFill([
                     'githubLink' => $input['githubLink'],
                 ])->save();
             }else if($contGit != null){
                 throw ValidationException::withMessages(['githubLink' => 'This value is not valid']);
             }
-            if ($contLinked) {
+            if ($contLinked || $contIg == null) {
                 $user->forceFill([
                     'linkedinLink' => $input['linkedinLink'],
                 ])->save();
             }else if($contLinked != null){
                 throw ValidationException::withMessages(['linkedinLink' => 'This value is not valid']);
             }
-            if ($contIg) {
+            if ($contIg || $contIg == null) {
                 $user->forceFill([
                     'igLink' => $input['igLink'],
                 ])->save();
