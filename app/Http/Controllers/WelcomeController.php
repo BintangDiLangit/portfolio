@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Certificate;
 use App\Models\Client;
 use App\Models\Portofolio;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -42,7 +43,8 @@ class WelcomeController extends Controller
         $latest = Blog::orderBy('updated_at', 'desc')->limit(3)->get();
         $countLatest = $latest->count();
         $blogs = Blog::orderBy('updated_at', 'desc')->simplePaginate(2);
-        return view('blog.index', compact('blogs', 'latest', 'countLatest'));
+        $contributor = User::where('is_admin', 0)->get();
+        return view('blog.index', compact('blogs', 'latest', 'countLatest','contributor'));
     }
     public function showBlog($title)
     {

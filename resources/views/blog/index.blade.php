@@ -134,6 +134,41 @@
     </section>
     <!--================End Blog Area =================-->
 
+    <!--================ Contributor Area =================-->
+    <div class="testimonial_area section_gap_bottom" id="testimoni">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <div class="main_title">
+                        <h2>client say about me</h2>
+                        <p>the following positive feedback given by some of my clients.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="testi_slider owl-carousel">
+                    @foreach ($contributor as $ctb)
+                        <div class="testi_item">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <img style="width: 135px!important; height: 180px;"
+                                        src="{{ asset('storage/' . $ctb->profile_photo_path) }}" alt="">
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="testi_text">
+                                        <h4>{{ $ctb->name }}</h4>
+                                        <p>{{ $ctb->bio }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================ Contributor Area =================-->
+
     <!--================Footer Area =================-->
     @include('layouts.landing.footer')
     <!--================End Footer Area =================-->
