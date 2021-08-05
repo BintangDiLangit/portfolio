@@ -69,7 +69,7 @@
                             </div>
                         </div>
                     @endforeach
-                    {{ $security->onEachSide(3)->links() }}
+                    {{ $security->links() }}
                     @foreach ($software as $sfw)
                         <div class="col-lg-4 col-md-6 all following">
                             <div class="portfolio_box">
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                     @endforeach
-                    {{ $software->onEachSide(3)->links() }}
+                    {{ $software->links() }}
                     @foreach ($softskill as $sft)
                         <div class="col-lg-4 col-md-6 all upcoming">
                             <div class="portfolio_box">
@@ -117,7 +117,7 @@
                             </div>
                         </div>
                     @endforeach
-                    {{ $softskill->onEachSide(3)->links() }}
+                    {{ $softskill->links() }}
                 </div>
             </div>
         </div>

@@ -23,9 +23,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($certificates as $cert)
+                        @foreach ($certificates as $key => $cert)
                             <tr>
-                                <th scope="row"> {{ $loop->iteration }} </th>
+                                <th scope="row"> {{ $certificates->firstItem() + $key }} </th>
                                 <td> {{ $cert->name }} </td>
                                 <td> {{ $cert->type }} </td>
                                 <td>
@@ -85,7 +85,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
-                    {{ $certificates->onEachSide(5)->links() }}
+                    {{ $certificates->links() }}
                 </div>
             </div>
         </div>
