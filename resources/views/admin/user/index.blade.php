@@ -37,6 +37,11 @@
                                     @else
                                         <span class="badge rounded-pill bg-warning text-dark">Member</span>
                                     @endif
+                                    @if ($user->email_verified_at)
+                                        <span class="badge rounded-pill bg-info text-dark">Verified Email</span>
+                                    @else
+                                        <span class="badge rounded-pill bg-danger text-light">Not Verified Email</span>
+                                    @endif
                                     {{ $user->creator }}
                                 </td>
                                 <td>
