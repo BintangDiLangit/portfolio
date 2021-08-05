@@ -12,12 +12,6 @@ use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
-Route::get('/certifApr', function(){
-    return view('appreciation.certificate');
-});
-Route::get('/ttd', function(){
-    return view('appreciation.ttd');
-});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -35,6 +29,12 @@ Route::get('tag/{tag_id}', [TagController::class, 'show']);
 Route::get('tag', [TagController::class, 'index']);
 
 Route::group(['middleware'=>'isAdmin'],function(){
+    Route::get('/certifApr', function(){
+        return view('appreciation.certificate');
+    });
+    Route::get('/ttd', function(){
+        return view('appreciation.ttd');
+    });
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard-admin', [DashboardController::class, 'indexAdmin'])->name('dashboard.admin');
     Route::resource('admin/portofolio',PortofolioController::class)->middleware('auth');
     Route::resource('admin/certificate',CertificateController::class)->middleware('auth');

@@ -45,6 +45,10 @@
                                     {{ $user->creator }}
                                 </td>
                                 <td>
+                                    <a href="{{ route('user.show', ['user' => $user->id]) }}" class="btn btn-info"><i
+                                            class="fa fa-info"></i>
+                                        Send Certificate
+                                    </a>
                                     <a href="{{ route('user.destroy', ['user' => $user]) }}" type="button"
                                         class="btn btn-danger" data-toggle="modal"
                                         data-target="#deleteConf{{ $user->id }}"><i class="fa fa-trash"></i>

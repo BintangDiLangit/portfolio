@@ -138,21 +138,20 @@
     <div
         style="position:absolute;left:50%;margin-left:-420px;top:0px;width:841px;height:595px;border-style:outset;overflow:hidden">
         <div style="position:absolute;left:0px;top:0px">
-            <img src="{{ asset('appreciation/beginner_writer/coa.png') }}"
+            <img src="{{ asset('appreciation/beginner_writer/coa.jpg') }}"
                 width=841 height=595>
         </div>
         <div style="position:absolute;left:196.52px;top:74.00px" class="cls_002"><span class="cls_002">CERTIFICATE OF
                 APPRECIATION</span></div>
         <div style="position:absolute;left:338.16px;top:132.96px" class="cls_003"><span class="cls_003">This is to
                 certify that</span></div>
-        <div style="position:absolute;left:245.26px;top:189.91px" class="cls_004"><span class="cls_004">ANNETH
-                DILLON</span></div>
+        <div style="position:absolute;left:245.26px;top:189.91px" class="cls_004"><span class="cls_004">{{ $user->name }}</span></div>
         <div style="position:absolute;left:164.98px;top:251.65px" class="cls_005"><span class="cls_005">has shown his
                 persistence in contributing to writing articles and become</span></div>
         <div style="position:absolute;left:254.70px;top:276.39px" class="cls_005"><span class="cls_005">a </span><span
                 class="cls_006">Beginner Writer</span><span class="cls_005"> of "bintangmfhd.tech/blog".</span></div>
-        <div style="position:absolute;left:139.28px;top:376.04px" class="cls_007"><span class="cls_007">Completed on
-                September 18, 2020</span></div>
+        <div style="position:absolute;left:158.28px;top:376.04px" class="cls_007"><span class="cls_007">Completed on
+                {{ $timeNow }}</span></div>
         <div style="position:absolute;left:212.28px;top:403.04px" class="cls_007"><img src="{{ asset('appreciation/beginner_writer/ttd_qr.png') }}" width=90 alt=""></div>
         <div style="position:absolute;left:179.25px;top:497.05px" class="cls_007"><span class="cls_007">Bintang Miftaqul
                 Huda</span></div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class UserController extends Controller
 {
@@ -11,6 +12,12 @@ class UserController extends Controller
         $users = User::all();
         return view('admin.user.index', compact('users'));
     }
+    public function show($id){
+        $timeNow = Carbon::now()->format('d M, Y');
+        $user = User::where('id', $id)->first();
+        return view('appreciation.certificate',compact('timeNow','user'));
+    }
+
 
     public function destroy($id)
     {
