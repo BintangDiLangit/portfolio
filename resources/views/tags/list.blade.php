@@ -17,6 +17,7 @@
                     <div class="page_link">
                         <a href="{{ route('welcome') }}">Home</a>
                         <a href="{{ route('blog') }}">Blog</a>
+                        <a href="/tag/{{ $tag->id }}">Tag</a>
                     </div>
                 </div>
             </div>
@@ -28,22 +29,6 @@
     <section class="blog_categorie_area section_gap_top">
         <div class="container">
             <div class="row">
-                @foreach ($latest as $blg)
-                    <div class="col-lg-4">
-                        <div class="categories_post">
-                            <img src="{{ asset('../blog-images/' . $blg->imageHeader) }}" alt="post">
-                            <div class="categories_details">
-                                <div class="categories_text">
-                                    <a href="{{ 'blog/' . $blg->link_route }}">
-                                        <h5>{{ $blg->title }}</h5>
-                                    </a>
-                                    <div class="border_line"></div>
-                                    <p>{{ $blg->creator }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
             </div>
         </div>
     </section>
@@ -55,7 +40,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="blog_left_sidebar">
-                        @foreach ($blogs as $blg)
+                        @foreach ($list as $blg)
                             <article class="row blog_item">
                                 <div class="col-md-3">
                                     <div class="blog_info text-right">
@@ -87,15 +72,15 @@
                                 </div>
                             </article>
                         @endforeach
-                        <div class="pull-left">>
+                        {{-- <div class="pull-left">>
                             showing
-                            {{ $blogs->firstItem() }}
+                            {{ $list->firstItem() }}
                             to
-                            {{ $blogs->lastItem() }}
+                            {{ $list->lastItem() }}
                         </div>
                         <div class="pull-right">
-                            {!! $blogs->links() !!}
-                        </div>
+                            {!! $list->links() !!}
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-lg-4">

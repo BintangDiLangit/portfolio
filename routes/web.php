@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CVController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PortofolioController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,8 @@ Route::get('/portofolio/{id}', [WelcomeController::class, 'show'])->name('porto.
 Route::get('/blog', [WelcomeController::class, 'indexBlog'])->name('blog');
 Route::get('/blog/{title}', [WelcomeController::class, 'showBlog'])->name('blg.show');
 
+Route::get('tag/{tag_id}', [TagController::class, 'show']);
+Route::get('tag', [TagController::class, 'index']);
 
 Route::group(['middleware'=>'isAdmin'],function(){
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard-admin', [DashboardController::class, 'indexAdmin'])->name('dashboard.admin');
