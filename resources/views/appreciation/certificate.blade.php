@@ -2,6 +2,7 @@
 
 <head>
     <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+    <title>Certificate of Appreciation</title>
     <style type="text/css">
         <!--
         span.cls_002 {

@@ -35,6 +35,9 @@ Route::group(['middleware'=>'isAdmin'],function(){
     Route::get('/formatCert', function(){
         return view('appreciation.formatCert');
     });
+    Route::get('/appreciation/certificate/word', function(){
+        return view('appreciation.word');
+    });
     Route::get('/ttd', function(){
         return view('appreciation.ttd');
     });

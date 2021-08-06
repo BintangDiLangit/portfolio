@@ -6,6 +6,7 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -27,8 +28,16 @@ class UserController extends Controller
         $data2 = file_get_contents($path2);
         $pic2 = 'data:image/' . $type2 . ';base64,' . base64_encode($data2);
 
+        $dataFinal["email"] = $user->email;
+        $dataFinal["title"] = "From bintangmfhd.tech";
+        $dataFinal["body"] = "Selamat atas pencapaiannya";
         $pdf = PDF::loadview('appreciation.certificate', compact('timeNow','user','pic','pic2'));
-        return $pdf->stream($user->name.'_Beginner Writer Certificate.pdf');
+        Mail::send(['text' => 'appreciation.word'],$dataFinal, function($message)use($dataFinal, $pdf) {
+            $message->to($dataFinal["email"], $dataFinal["email"])
+                    ->subject($dataFinal["title"])
+                    ->attachData($pdf->output(), 'Beginner Writer Certificate.pdf');
+        });
+        return redirect(route('user.index'))->with('success','Mail sent successfully');
     }
 
 
