@@ -21,6 +21,7 @@
                             <th scope="col">No</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Blog</th>
                             <th scope="col">Role</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -31,6 +32,24 @@
                                 <th scope="row"> {{ $loop->iteration }} </th>
                                 <td> {{ $user->name }} </td>
                                 <td> {{ $user->email }} </td>
+                                <td>
+                                    @php
+                                        $countBlog = $user->blogs_count;
+                                        $achievement = '';
+                                        if ($countBlog > 0 && $countBlog <= 10) {
+                                            $achievement = 'Beginner Writer';
+                                        } elseif ($countBlog > 10 && $countBlog <= 30) {
+                                            $achievement = 'Junior Writer';
+                                        } elseif ($countBlog > 30 && $countBlog <= 50) {
+                                            $achievement = 'Writer';
+                                        } elseif ($countBlog > 50) {
+                                            $achievement = 'Senior Writer';
+                                        } else {
+                                            $achievement = "Let's write now";
+                                        }
+                                    @endphp
+                                    <span class="badge rounded-pill bg-dark text-light">{{ $achievement }}</span>
+                                </td>
                                 <td>
                                     @if ($user->is_admin)
                                         <span class="badge rounded-pill bg-warning text-dark">Admin</span>

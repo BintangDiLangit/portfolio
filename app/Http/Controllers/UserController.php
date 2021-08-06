@@ -4,14 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Barryvdh\DomPDF\Facade as PDF;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
+    protected static function rating($userBlog){
+
+        $countBlog = $userBlog->count();;
+        // dd($countBlog);
+        $achievement = '';
+        $star = 0;
+        if ($countBlog > 0 && $countBlog<=10) {
+            $achievement = 'Beginner Writer';
+            $star += 1;
+        }else if ($countBlog > 10 && $countBlog <= 30) {
+            $achievement = 'Junior Writer';
+            $star += 2;
+        }else if($countBlog > 30 && $countBlog <= 50){
+            $achievement = 'Writer';
+            $star += 3;
+        }else if($countBlog > 50){
+            $achievement = 'Senior Writer';
+            $star += 4;
+        }else{
+            $achievement = "Let's write now";
+        }
+        return $achievement;
+    }
     public function index(){
-        $users = User::all();
+        $users = User::withCount('blogs')->get();
+        // $users = User::all();
+        // $wow = $users->blogs->count();
+        // $user = User::find(1)->blogs->count();
+
+        // $rate = self::rating($users);
+        // dd($rate);
         return view('admin.user.index', compact('users'));
     }
     public function show($id){

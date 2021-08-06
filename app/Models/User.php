@@ -30,6 +30,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'bio',
     ];
 
+    public function blogs(){
+        return $this->hasMany(Blog::class, 'user_id');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
