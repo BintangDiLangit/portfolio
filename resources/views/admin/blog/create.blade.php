@@ -53,8 +53,9 @@
                             <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Tags</label>
-                            <input type="text" placeholder="separate by comma" class="form-control" name="tags"
+                            <label for="exampleFormControlInput1">Tags <span class="text-secondary">(separate by
+                                    comma)</span></label>
+                            <input type="text" placeholder="" class="form-control" name="tags"
                                 value={{ old('tags', '') }}>
                         </div>
 

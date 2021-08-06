@@ -25,21 +25,26 @@
                             <div class="card mb-3 border-0" style="max-width: 540px;">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <button type="button" class="btn btn-dark position-relative mb-2">
-                                            {{ $achievement }} <svg width="1em" height="1em" viewBox="0 0 16 16"
-                                                class="position-absolute top-100 start-50 translate-middle mt-1 bi bi-caret-down-fill"
-                                                fill="#212529" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                                            </svg>
-                                        </button>
                                         <img src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
                                             class="img-fluid rounded-start" alt="...">
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 mb-3">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ Auth::user()->name }}</h5>
                                             <p class="card-text">{{ Auth::user()->bio }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span
+                                            class="badge rounded-pill bg-primary mb-3 fs-5 text-center">{{ $achievement }}</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            @for ($i = 0; $i < $star; $i++)
+                                                <img width="50px" class="rounded float-start mr-3"
+                                                    src="{{ asset('appreciation/rank/favourites.png') }}" alt="">
+                                            @endfor
                                         </div>
                                     </div>
                                 </div>
