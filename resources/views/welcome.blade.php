@@ -17,7 +17,7 @@
                         <div class="banner_content">
                             <h3 class="text-uppercase">Hell0</h3>
                             <h1 class="text-uppercase">I am Bintang Miftaqul Huda</h1>
-                            <h5 class="text-uppercase">Junior Fullstack web developer</h5>
+                            <h5 class="text-uppercase">Junior Fullstack developer</h5>
                             <div class="d-flex align-items-center">
                                 <a class="primary_btn" href="https://www.linkedin.com/in/bintangmfhd/"
                                     target="_blank"><span>LinkedIn</span></a>
@@ -55,7 +55,7 @@
                             myself</h2>
                         <p>
                             I am a student, who focuses on the backend field, and continue to develop my skills to
-                            become a fullstack developer.
+                            become a senior fullstack developer.
                         </p>
                         <p>
                             I also provide website creation services. I am also active on linked in, medium, and create
@@ -89,7 +89,7 @@
                         <img src="{{ asset('../satner/img/services/s1.png') }}" alt="">
                         <h4>Laravel Web Developing</h4>
                         <p>
-                            have done several projects solo and in teams using laravels 6 and 8. And from those
+                            have done several projects solo and in teams using Laravel 6 and 8. And from those
                             projects, most of them I lead.</p>
                     </div>
                 </div>
