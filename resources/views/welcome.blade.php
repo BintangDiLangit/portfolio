@@ -77,7 +77,8 @@
                     <div class="main_title">
                         <h2>skills </h2>
                         <p>
-                            I have skills in programming, both wa and car. And I also have skills in the field of Cyber
+                            I have skills in programming, both web and mobile. And I also have skills in the field of
+                            Cyber
                             ​​Security. This can be proven from my portfolio and certificate list
                         </p>
                     </div>
