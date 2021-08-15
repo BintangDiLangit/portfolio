@@ -60,11 +60,11 @@ class WelcomeController extends Controller
             if ($time->format('%y') == '0' && $time->format('%m') == '0' && $time->format('%d') == '0') {
                 array_push($result, $time->format('%h hours %i minutes'));
             } elseif ($time->format('%y') == '0' && $time->format('%m') == '0') {
-                array_push($result, $time->format('$d days %h hours'));
+                array_push($result, $time->format('%d days %h hours'));
             } elseif ($time->format('%y') == '0') {
-                array_push($result, $time->format('$m months $d days'));
+                array_push($result, $time->format('%m months %d days'));
             } elseif ($time->format('%y') != '0') {
-                array_push($result, $time->format('$y years $m months'));
+                array_push($result, $time->format('%y years %m months'));
             }
         }
         return view('blog.show', compact('blog', 'latest', 'result', 'countLatest'));

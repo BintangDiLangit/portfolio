@@ -32,15 +32,15 @@
                     <div class="col-lg-4">
                         <div class="categories_post">
                             <img src="{{ asset('../blog-images/' . $blg->imageHeader) }}" alt="post">
-                            <div class="categories_details">
-                                <div class="categories_text">
-                                    <a href="{{ 'blog/' . $blg->link_route }}">
+                            <a href="{{ 'blog/' . $blg->link_route }}">
+                                <div class="categories_details">
+                                    <div class="categories_text">
                                         <h5>{{ $blg->title }}</h5>
-                                    </a>
-                                    <div class="border_line"></div>
-                                    <p>{{ $blg->creator }}</p>
+                                        <div class="border_line"></div>
+                                        <p>{{ $blg->creator }}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 @endforeach
