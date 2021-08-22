@@ -85,40 +85,15 @@
                 </div>
             </div>
             <div class="row feature_inner">
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature_item">
-                        <img src="{{ asset('../satner/img/services/s1.png') }}" alt="">
-                        <h4>Laravel Web Developing</h4>
-                        <p>
-                            have done several projects solo and in teams using Laravel 6 and 8. And from those
-                            projects, most of them I lead.</p>
+                @foreach ($skills as $skill)
+                    <div class="col-lg-3 col-md-6">
+                        <div class="feature_item">
+                            <img src="{{ asset('../skill-images/' . $skill->skill_img) }}" alt="">
+                            <h4>{{ $skill->skill_name }}</h4>
+                            <p>{{ $skill->skill_desc }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature_item">
-                        <img src="{{ asset('../satner/img/services/s22.png') }}" alt="">
-                        <h4>Ruby on Rails Web Developing</h4>
-                        <p>Create some projects like a simple Tweet App with ruby ​​on rails</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature_item">
-                        <img src="{{ asset('../satner/img/services/s5.png') }}" alt="">
-                        <h4>NodeJs Web Developing</h4>
-                        <p>There was once a node js-based website project, this project is the result of the final
-                            training project from progate, and there are also several other projects that are still in
-                            the development stage.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature_item">
-                        <img src="{{ asset('../satner/img/services/s4.png') }}" alt="">
-                        <h4>fast learning</h4>
-                        <p>
-                            My speed in learning can be proven by my track record which is on linked in. And this is
-                            evident when I learn something new, I understand it before anyone else.</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

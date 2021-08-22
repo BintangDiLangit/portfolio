@@ -52,8 +52,8 @@
                         <div class="col-sm-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Certificate</h5>
-                                    <p class="card-text">{{ $certificate }}</p>
+                                    <h5 class="card-title">Skills</h5>
+                                    <a href="{{ route('skill.index') }}">Go!</a>
                                 </div>
                             </div>
                         </div>

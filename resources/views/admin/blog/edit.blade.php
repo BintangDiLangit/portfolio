@@ -21,7 +21,8 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Title</label>
+                            <label for="exampleFormControlInput1">Title<span class="text-secondary"> (Special characters
+                                    are not allowed)</span></label>
                             <input type="text" name="title" class="form-control" id="exampleFormControlInput1"
                                 placeholder="title" value="{{ $blog->title }}">
                             @error('title') <span class="text-red-500">{{ $message }}</span>@enderror

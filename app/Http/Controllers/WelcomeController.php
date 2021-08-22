@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Certificate;
 use App\Models\Client;
 use App\Models\Portofolio;
+use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -15,7 +16,8 @@ class WelcomeController extends Controller
     public function index()
     {
         $messages = Client::all();
-        return view('welcome', compact('messages'));
+        $skills = Skill::all();
+        return view('welcome', compact('messages','skills'));
     }
 
     public function indexPortofolio()

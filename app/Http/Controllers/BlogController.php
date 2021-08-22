@@ -24,7 +24,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'title'    => 'required|string',
+            'title'    => 'required|string|regex:/^[a-zA-Z]+$/u',
             'imageHeader'    => 'required|image',
             'content'    => 'required',
         ]);

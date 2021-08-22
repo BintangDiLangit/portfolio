@@ -1,61 +1,58 @@
 @section('title')
-    Certificate List
+    Skill
 @endsection
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            All Certificate
+            All Skills
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="mb-3">
+                <a href="{{ route('skill.create') }}" class="btn btn-primary">Add Skill</a>
+            </div>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <table class="table table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Certificate Name</th>
-                            <th scope="col">Certificate Type</th>
-                            <th scope="col">Credential Link</th>
+                            <th scope="col">Skill</th>
+                            <th scope="col">Last Updated</th>
                             <th scope="col">Image</th>
+                            <th scope="col">Description</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($certificates as $key => $cert)
+                        @foreach ($skills as $skill)
                             <tr>
-                                <th scope="row"> {{ $certificates->firstItem() + $key }} </th>
-                                <td> {{ $cert->name }} </td>
-                                <td> {{ $cert->type }} </td>
-                                <td>
-                                    @if ($cert->linkCert)
-                                        <a href="{{ $cert->linkCert }}" class="badge badge-info">Link</a>
-                                    @else
-                                        <p class="text-danger">Credential Link Not Found</p>
-                                    @endif
-                                </td>
+                                <th scope="row"> {{ $loop->iteration }} </th>
+                                <td> {{ $skill->skill_name }} </td>
+                                <td> {{ $skill->updated_at }} </td>
                                 <td>
                                     <img style="width: 100px"
-                                        src="{{ asset('../certificate-images/' . $cert->imgCert) }}">
+                                        src="{{ asset('../skill-images/' . $skill->skill_img) }}">
                                 </td>
+                                <td> {{ $skill->skill_desc }} </td>
                                 <td>
-                                    <a href="{{ route('certificate.edit', ['certificate' => $cert]) }}"
+                                    <a href="{{ route('skill.edit', ['skill' => $skill]) }}"
                                         class="btn btn-primary"><i class="fa fa-pencil"></i> Edit </a>
-                                    <a href="{{ route('certificate.destroy', ['certificate' => $cert]) }}"
-                                        type="button" class="btn btn-danger" data-toggle="modal"
-                                        data-target="#deleteConf{{ $cert->id }}"><i class="fa fa-trash"></i>
+                                    <a href="{{ route('skill.destroy', ['skill' => $skill]) }}" type="button"
+                                        class="btn btn-danger" data-toggle="modal"
+                                        data-target="#deleteConf{{ $skill->id }}"><i class="fa fa-trash"></i>
                                         Delete
                                     </a>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="deleteConf{{ $cert->id }}" tabindex="-1"
+                                    <div class="modal fade" id="deleteConf{{ $skill->id }}" tabindex="-1"
                                         role="dialog" aria-labelledby="deleteConfLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="deleteConfLabel">
-                                                        Delete Certificate</h5>
+                                                        Delete Skill</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">x</span>
@@ -68,8 +65,7 @@
                                                     <button class="btn btn-link" data-dismiss="modal">
                                                         Cancel
                                                     </button>
-                                                    <form
-                                                        action="{{ route('certificate.destroy', ['certificate' => $cert]) }}"
+                                                    <form action="{{ route('skill.destroy', ['skill' => $skill]) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('delete')
@@ -84,9 +80,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-center">
-                    {{ $certificates->onEachSide(5)->links('pagination::bootstrap-4') }}
-                </div>
             </div>
         </div>
     </div>
