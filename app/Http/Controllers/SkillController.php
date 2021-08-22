@@ -21,7 +21,7 @@ class SkillController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'skill_name'    => 'required|string|max:28',
+            'skill_name'    => 'required|string|max:255',
             'skill_img'    => 'required|image',
             'skill_desc'    => 'required|string',
         ]);
@@ -47,7 +47,7 @@ class SkillController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'skill_name'    => 'required|string|max:28',
+            'skill_name'    => 'required|string|max:255',
             'skill_img'    => 'image',
             'skill_desc'    => 'required|string',
         ]);
