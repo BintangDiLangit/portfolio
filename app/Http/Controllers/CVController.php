@@ -28,6 +28,7 @@ class CVController extends Controller
             } else {
                 $cvUpdate = cv::find('1');
                 $request->file('file')->move('file-cv/', 'cv.pdf');
+                $cvUpdate->path = 'cv.pdf';
                 $cvUpdate->update();
             }
             return redirect(route('cv.index'))->with('status', 'CV Has been uploaded successfully');
