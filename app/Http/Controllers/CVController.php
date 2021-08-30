@@ -19,8 +19,8 @@ class CVController extends Controller
         ]);
 
         if ($request->hasFile('file')) {
-            $cvv = CV::all();
-            if ($cvv == null) {
+            $cvv = count(CV::all());
+            if ($cvv == 0) {
                 $cv = new CV;
                 $request->file('file')->move('file-cv/', 'cv.pdf');
                 $cv->path = 'cv.pdf';
