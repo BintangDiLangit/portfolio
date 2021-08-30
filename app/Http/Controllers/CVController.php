@@ -10,7 +10,7 @@ class CVController extends Controller
     public function index()
     {
         $cv = CV::all();
-        return view('admin.cv.index',compact('cv'));
+        return view('admin.cv.index', compact('cv'));
     }
     public function store(Request $request)
     {
@@ -18,15 +18,18 @@ class CVController extends Controller
             'file' => 'required|mimes:pdf|max:10000',
         ]);
 
-        if ($request->hasFile('file')){
-            $cv = new CV;
+        if ($request->hasFile('file')) {
             $cvv = CV::all();
-            $request->file('file')->move('file-cv/','cv.pdf');
-            if ($cvv == null ) {
+            if ($cvv == null) {
+                $cv = new CV;
+                $request->file('file')->move('file-cv/', 'cv.pdf');
                 $cv->path = 'cv.pdf';
                 $cv->save();
+            } else {
+                $cvUpdate = cv::find('1');
+                $request->file('file')->move('file-cv/', 'cv.pdf');
+                $cvUpdate->update();
             }
-            $cv->update();
             return redirect(route('cv.index'))->with('status', 'CV Has been uploaded successfully');
         }
     }
