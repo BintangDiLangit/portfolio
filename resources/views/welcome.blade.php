@@ -29,7 +29,8 @@
                     </div>
                     <div class="col-lg-5">
                         <div class="home_right_img">
-                            <img class="" src="{{ asset('../satner/img/banner/home-right.png') }}" alt="">
+                            <img class="___class_+?15___" src="{{ asset('../satner/img/banner/home-right.png') }}"
+                                alt="">
                         </div>
                     </div>
                 </div>
@@ -44,7 +45,7 @@
             <div class="row justify-content-start align-items-center">
                 <div class="col-lg-5">
                     <div class="about_img">
-                        <img class="" src="{{ asset('../satner/img/about-us.png') }}" alt="">
+                        <img class="___class_+?21___" src="{{ asset('../satner/img/about-us.png') }}" alt="">
                     </div>
                 </div>
 
