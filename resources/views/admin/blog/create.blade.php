@@ -25,8 +25,7 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Title<span class="text-secondary"> (Special characters
-                                    are not allowed)</span></label>
+                            <label for="exampleFormControlInput1">Title</label>
                             <input type="text" name="title" class="form-control" id="exampleFormControlInput1"
                                 placeholder="title" value="{{ old('title') }}">
                             @error('title') <span class="text-red-500">{{ $message }}</span>@enderror
