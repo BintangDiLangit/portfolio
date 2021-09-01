@@ -38,7 +38,7 @@
             </div>
             <div class="filters portfolio-filter">
                 <ul>
-                    {{-- <li class="active" data-filter="*">all</li> --}}
+                    <li class="active" data-filter="*">all</li>
                     <li data-filter=".popular">security</li>
                     <li data-filter=".following">software</li>
                     <li data-filter=".upcoming">softskill</li>
