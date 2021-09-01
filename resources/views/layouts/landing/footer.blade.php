@@ -84,8 +84,8 @@
             alert("Search Under Maintenance");
         }
     </script>
-    <script>
-        $(document).ready(function() {
-            $('img').lazyload();
+    <script type="text/javascript">
+        $("img").lazyload({
+            effect: "fadeIn"
         });
     </script>
