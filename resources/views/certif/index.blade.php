@@ -126,6 +126,12 @@
     </section>
     <!--================End Portfolio Area =================-->
 
+    <script type="text/javascript">
+        $("img.lazy").lazyload({
+            alert("Search Under Maintenance");
+            effect: "fadeIn"
+        });
+    </script>
     <!--================Footer Area =================-->
     @include('layouts.landing.footer')
     <!--================End Footer Area =================-->
