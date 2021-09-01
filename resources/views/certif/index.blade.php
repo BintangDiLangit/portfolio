@@ -2,9 +2,6 @@
 <html lang="en">
 
 @include('layouts.landing.head')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"
-integrity="sha512-jNDtFf7qgU0eH/+Z42FG4fw3w7DM/9zbgNPe3wfJlCylVDTT3IgKW5r92Vy9IHa6U50vyMz5gRByIu4YIXFtaQ=="
-crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <body>
 
@@ -53,7 +50,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                         <div class="col-lg-4 col-md-6 all popular">
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
-                                    <img class="img-fluid w-100 lazy" loading="lazy"
+                                    <img class="img-fluid w-100" loading="lazy"
                                         src="https://bintangmfhd.tech/certificate-images/{{ $sec->imgCert }}" alt="">
                                     <div class="overlay"></div>
                                     <a href="{{ asset('../certificate-images/' . $sec->imgCert) }}"
@@ -77,7 +74,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                         <div class="col-lg-4 col-md-6 all following">
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
-                                    <img class="img-fluid w-100 lazy" loading="lazy"
+                                    <img class="img-fluid w-100" loading="lazy"
                                         src="https://bintangmfhd.tech/certificate-images/{{ $sfw->imgCert }}" alt="">
                                     <div class="overlay"></div>
                                     <a href="{{ asset('../certificate-images/' . $sfw->imgCert) }}"
@@ -101,7 +98,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                         <div class="col-lg-4 col-md-6 all upcoming">
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
-                                    <img class="img-fluid w-100 lazy" loading="lazy"
+                                    <img class="img-fluid w-100" loading="lazy"
                                         src="https://bintangmfhd.tech/certificate-images/{{ $sft->imgCert }}" alt="">
                                     <div class="overlay"></div>
                                     <a href="{{ asset('../certificate-images/' . $sft->imgCert) }}"
@@ -126,13 +123,6 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         </div>
     </section>
     <!--================End Portfolio Area =================-->
-
-    <script type="text/javascript">
-        $("img.lazy").lazyload({
-            alert("Search Under Maintenance");
-            effect: "fadeIn"
-        });
-    </script>
     <!--================Footer Area =================-->
     @include('layouts.landing.footer')
     <!--================End Footer Area =================-->
