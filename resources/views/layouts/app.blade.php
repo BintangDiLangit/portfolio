@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    @yield('head')
     @livewireStyles
 
     <!-- Scripts -->
@@ -61,6 +62,8 @@
     @livewireScripts
 
     <script src="{{ asset('../js/cert.js') }}"></script>
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+
     @stack('bot_script')
 
 </body>

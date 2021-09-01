@@ -1,11 +1,16 @@
 @section('title')
     Create Blog
 @endsection
+@section('head')
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+@endsection
 <x-app-layout>
     @push('head_script')
         <script src="https://cdn.tiny.cloud/1/oa8jmz8jvqz4wjrgj18i7em5pbidibl49aqwfx0lii7m4tuc/tinymce/5/tinymce.min.js"
                 referrerpolicy="origin"></script>
     @endpush
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Create Blog
@@ -44,8 +49,8 @@
                                 <div class="file-upload-content">
                                     <img class="file-upload-image" src="#" alt="your image" />
                                     <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
-                                                class="image-title">Uploaded Image</span></button>
+                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove
+                                            <span class="image-title">Uploaded Image</span></button>
                                     </div>
                                 </div>
                             </div>
@@ -56,8 +61,14 @@
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Tags <span class="text-secondary">(separate by
                                     comma)</span></label>
-                            <input type="text" placeholder="" class="form-control" name="tags"
-                                value={{ old('tags', '') }}>
+                            {{-- <input type="text" placeholder="" class="form-control" name="tags"
+                                value={{ old('tags', '') }}> --}}
+                            <select class="select2multiple form-control" name="tags[]" multiple="multiple">
+                                @for ($i = 0; $i < count($tags); $i++)
+                                    <option value="{{ $tags[$i]->tag_name }}">{{ $tags[$i]->tag_name }}</option>
+
+                                @endfor
+                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-success float-right mb-3">Save</button>
@@ -68,6 +79,14 @@
     </div>
 
     @push('bot_script')
+        <script>
+            $(function() {
+                $('.select2multiple').select2({
+                    theme: 'bootstrap4',
+                    tags: true
+                });
+            });
+        </script>
         <script>
             var editor_config = {
                 path_absolute: "/",
