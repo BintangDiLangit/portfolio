@@ -29,7 +29,8 @@
                     </div>
                     <div class="col-lg-5">
                         <div class="home_right_img">
-                            <img class="" src="{{ asset('../satner/img/banner/home-right.png') }}" alt="">
+                            <img class="___class_+?14___" src="{{ asset('../satner/img/banner/home-right.png') }}"
+                                loading="lazy" alt="">
                         </div>
                     </div>
                 </div>
@@ -44,7 +45,8 @@
             <div class="row justify-content-start align-items-center">
                 <div class="col-lg-5">
                     <div class="about_img">
-                        <img class="" src="{{ asset('../satner/img/about-us.png') }}" alt="">
+                        <img class="___class_+?20___" src="{{ asset('../satner/img/about-us.png') }}" loading="lazy"
+                            alt="">
                     </div>
                 </div>
 
@@ -88,7 +90,7 @@
                 @foreach ($skills as $skill)
                     <div class="col-lg-3 col-md-6">
                         <div class="feature_item">
-                            <img src="{{ asset('../skill-images/' . $skill->skill_img) }}" alt="">
+                            <img src="{{ asset('../skill-images/' . $skill->skill_img) }}" loading="lazy" alt="">
                             <h4>{{ $skill->skill_name }}</h4>
                             <p>{{ $skill->skill_desc }}</p>
                         </div>
@@ -117,7 +119,7 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <img style="width: 135px!important; height: 180px;"
-                                        src="{{ asset('../client-images/' . $msg->photo) }}" alt="">
+                                        src="{{ asset('../client-images/' . $msg->photo) }}" loading="lazy" alt="">
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="testi_text">

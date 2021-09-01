@@ -43,9 +43,11 @@
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
                                     <img class="img-fluid w-100"
-                                        src="{{ asset('../portofolio-images/' . $porto->image) }}" alt="">
+                                        src="{{ asset('../portofolio-images/' . $porto->image) }}" loading="lazy"
+                                        alt="">
                                     <div class="overlay"></div>
-                                    <a href="{{ asset('../portofolio-images/' . $porto->image) }}" class="img-gal">
+                                    <a href="{{ asset('../portofolio-images/' . $porto->image) }}"
+                                        class="img-gal">
                                         <div class="icon">
                                             <span class="lnr lnr-cross"></span>
                                         </div>

@@ -73,7 +73,8 @@
                                     @endforeach
                                     <div class="blog_post mt-3">
                                         <img width="555px" height="280px"
-                                            src="{{ asset('../blog-images/' . $blg->imageHeader) }}" alt="">
+                                            src="{{ asset('../blog-images/' . $blg->imageHeader) }}" loading="lazy"
+                                            alt="">
                                         <div class="blog_details">
                                             <a href="{{ route('blg.show', ['title' => $blg->link_route]) }}">
                                                 <h2>{{ $blg->title }}</h2>
