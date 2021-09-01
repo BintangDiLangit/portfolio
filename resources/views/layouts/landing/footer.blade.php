@@ -10,11 +10,6 @@
                             <h6>Malang, Indonesia</h6>
                             <p>Joyosuko Metro 4</p>
                         </div>
-                        {{-- <div class="info_item">
-                            <i class="lnr lnr-phone-handset"></i>
-                            <h6>+62 878 8137 7842</h6>
-                            <p>Mon to Fri 8am to 3pm</p>
-                        </div> --}}
                         <div class="info_item">
                             <i class="lnr lnr-envelope"></i>
                             <h6><a href="http://bintangmfhd@gmail.com/">bintangmfhd@gmail.com</a></h6>
@@ -88,4 +83,9 @@
         function myFunction() {
             alert("Search Under Maintenance");
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('img').lazyload();
+        });
     </script>
