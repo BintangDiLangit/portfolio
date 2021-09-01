@@ -51,8 +51,7 @@
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
                                     <img class="img-fluid w-100 lazy"
-                                        data-src="https://bintangmfhd.tech/certificate-images/{{ $sec->imgCert }}"
-                                        alt="">
+                                        src="https://bintangmfhd.tech/certificate-images/{{ $sec->imgCert }}" alt="">
                                     <div class="overlay"></div>
                                     <a href="{{ asset('../certificate-images/' . $sec->imgCert) }}"
                                         class="img-gal">
