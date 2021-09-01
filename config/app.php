@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Jakarta','locale' => 'id','faker_locale' => 'id_ID',
+    'timezone' => 'Asia/Jakarta', 'locale' => 'id', 'faker_locale' => 'id_ID',
 
     /*
     |--------------------------------------------------------------------------
@@ -179,6 +179,8 @@ return [
 
         Barryvdh\DomPDF\ServiceProvider::class,
 
+        Spatie\Analytics\AnalyticsServiceProvider::class,
+
     ],
 
     /*
@@ -234,6 +236,7 @@ return [
 
         'PDF' => Barryvdh\DomPDF\Facade::class,
 
+        'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
     ],
 
 ];

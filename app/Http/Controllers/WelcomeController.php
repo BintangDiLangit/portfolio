@@ -17,7 +17,7 @@ class WelcomeController extends Controller
     {
         $messages = Client::all();
         $skills = Skill::all();
-        return view('welcome', compact('messages','skills'));
+        return view('welcome', compact('messages', 'skills'));
     }
 
     public function indexPortofolio()
@@ -46,7 +46,7 @@ class WelcomeController extends Controller
         $countLatest = $latest->count();
         $blogs = Blog::orderBy('updated_at', 'desc')->simplePaginate(2);
         $contributor = User::all();
-        return view('blog.index', compact('blogs', 'latest', 'countLatest','contributor'));
+        return view('blog.index', compact('blogs', 'latest', 'countLatest', 'contributor'));
     }
     public function showBlog($title)
     {
@@ -55,7 +55,7 @@ class WelcomeController extends Controller
         $countLatest = $latest->count();
         $mytime = Carbon::now();
         $result = array();
-        for ($i=0; $i < $countLatest; $i++) {
+        for ($i = 0; $i < $countLatest; $i++) {
             $updateTime = $latest[$i]->updated_at;
             $time = \Carbon\Carbon::parse($updateTime)->diff(\Carbon\Carbon::now());
 
@@ -72,18 +72,18 @@ class WelcomeController extends Controller
         return view('blog.show', compact('blog', 'latest', 'result', 'countLatest'));
     }
 
-    public function searchBlog(){
+    public function searchBlog()
+    {
         // $search = $request->keyword;
 
         // $blogs = Blog::where('title','like',"%".$search."%")
-		// ->paginate();
+        // ->paginate();
 
-		// return view('blog',compact('blogs'));
+        // return view('blog',compact('blogs'));
         echo "<script>";
         echo "alert('Search Under Maintenance');";
         echo "</script>";
         // return response()->view('errors.site_down', [], 500);
-        return redirect()->back()->with('alert','Search Under Maintenance');
+        return redirect()->back()->with('alert', 'Search Under Maintenance');
     }
-
 }
