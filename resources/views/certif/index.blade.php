@@ -38,7 +38,7 @@
             </div>
             <div class="filters portfolio-filter">
                 <ul>
-                    <li class="active" data-filter="*">all</li>
+                    {{-- <li class="active" data-filter="*">all</li> --}}
                     <li data-filter=".popular">security</li>
                     <li data-filter=".following">software</li>
                     <li data-filter=".upcoming">softskill</li>
@@ -51,9 +51,10 @@
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
                                     <img class="img-fluid w-100"
-                                        src="{{ asset('../certificate-images/' . $sec->imgCert) }}" alt="">
+                                        data-original="{{ asset('../certificate-images/' . $sec->imgCert) }}" alt="">
                                     <div class="overlay"></div>
-                                    <a href="{{ asset('../certificate-images/' . $sec->imgCert) }}" class="img-gal">
+                                    <a href="{{ asset('../certificate-images/' . $sec->imgCert) }}"
+                                        class="img-gal">
                                         <div class="icon">
                                             <span class="lnr lnr-cross"></span>
                                         </div>
@@ -74,9 +75,10 @@
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
                                     <img class="img-fluid w-100"
-                                        src="{{ asset('../certificate-images/' . $sfw->imgCert) }}" alt="">
+                                        data-original="{{ asset('../certificate-images/' . $sfw->imgCert) }}" alt="">
                                     <div class="overlay"></div>
-                                    <a href="{{ asset('../certificate-images/' . $sfw->imgCert) }}" class="img-gal">
+                                    <a href="{{ asset('../certificate-images/' . $sfw->imgCert) }}"
+                                        class="img-gal">
                                         <div class="icon">
                                             <span class="lnr lnr-cross"></span>
                                         </div>
@@ -97,9 +99,10 @@
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
                                     <img class="img-fluid w-100"
-                                        src="{{ asset('../certificate-images/' . $sft->imgCert) }}" alt="">
+                                        data-original="{{ asset('../certificate-images/' . $sft->imgCert) }}" alt="">
                                     <div class="overlay"></div>
-                                    <a href="{{ asset('../certificate-images/' . $sft->imgCert) }}" class="img-gal">
+                                    <a href="{{ asset('../certificate-images/' . $sft->imgCert) }}"
+                                        class="img-gal">
                                         <div class="icon">
                                             <span class="lnr lnr-cross"></span>
                                         </div>
