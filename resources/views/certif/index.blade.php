@@ -53,7 +53,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                         <div class="col-lg-4 col-md-6 all popular">
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
-                                    <img class="img-fluid w-100 lazy"
+                                    <img class="img-fluid w-100 lazy" loading="lazy"
                                         data-original="https://bintangmfhd.tech/certificate-images/{{ $sec->imgCert }}"
                                         alt="">
                                     <div class="overlay"></div>
@@ -78,7 +78,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                         <div class="col-lg-4 col-md-6 all following">
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
-                                    <img class="img-fluid w-100 lazy"
+                                    <img class="img-fluid w-100 lazy" loading="lazy"
                                         data-original="https://bintangmfhd.tech/certificate-images/{{ $sfw->imgCert }}"
                                         alt="">
                                     <div class="overlay"></div>
@@ -103,7 +103,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                         <div class="col-lg-4 col-md-6 all upcoming">
                             <div class="portfolio_box">
                                 <div class="single_portfolio">
-                                    <img class="img-fluid w-100 lazy"
+                                    <img class="img-fluid w-100 lazy" loading="lazy"
                                         data-original="https://bintangmfhd.tech/certificate-images/{{ $sft->imgCert }}"
                                         alt="">
                                     <div class="overlay"></div>
