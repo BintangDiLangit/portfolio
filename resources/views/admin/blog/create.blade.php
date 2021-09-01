@@ -59,10 +59,7 @@
                             <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Tags <span class="text-secondary">(separate by
-                                    comma)</span></label>
-                            {{-- <input type="text" placeholder="" class="form-control" name="tags"
-                                value={{ old('tags', '') }}> --}}
+                            <label for="exampleFormControlInput1">Tags</label>
                             <select class="select2multiple form-control" name="tags[]" multiple="multiple">
                                 @for ($i = 0; $i < count($tags); $i++)
                                     <option value="{{ $tags[$i]->tag_name }}">{{ $tags[$i]->tag_name }}</option>
