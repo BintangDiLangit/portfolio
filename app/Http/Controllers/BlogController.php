@@ -18,7 +18,8 @@ class BlogController extends Controller
 
     public function create()
     {
-        return view('admin.blog.create');
+        $tags = Tag::all();
+        return view('admin.blog.create', compact('tags'));
     }
 
     public function store(Request $request)
@@ -32,8 +33,13 @@ class BlogController extends Controller
         $b = str_replace(' ', '-', $a);
         $c = preg_replace('/[^A-Za-z0-9\-]/', '', $b);
 
-        $tags_arr = explode(',', strtolower($request["tags"]));
 
+        $tag_req_arr = $request["tags"];
+        $tags_arr = [];
+
+        for ($i = 0; $i < count($tag_req_arr); $i++) {
+            $tags_arr[] = strtolower($tag_req_arr[$i]);
+        }
         $tag_ids = [];
         foreach ($tags_arr as $tag_name) {
             $tag = Tag::where('tag_name', $tag_name)->first();
