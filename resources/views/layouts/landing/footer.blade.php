@@ -85,7 +85,7 @@
         }
     </script>
     <script type="text/javascript">
-        $("img").lazyload({
+        $("img.lazy").lazyload({
             effect: "fadeIn"
         });
     </script>
