@@ -136,6 +136,10 @@
     </div>
     <!--================ End Testimonial Area =================-->
 
+    <!--================ Start Newsletter Area =================-->
+    @include('layouts.landing.newsletter')
+    <!--================ End Newsletter Area =================-->
+
     @include('layouts.landing.footer')
 </body>
 

@@ -69,9 +69,6 @@
     <script src="{{ asset('../satner/js/theme.js') }}"></script>
 
     {{-- Bootstrap 4 --}}
-    {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
     </script>
@@ -83,4 +80,31 @@
         function myFunction() {
             alert("Search Under Maintenance");
         }
+    </script>
+    <script>
+        const scriptURL =
+            'https://script.google.com/macros/s/AKfycbxwqod8NPB_xV6yHtdkTLHXupuP-uZcCKMb-YidASyIVgP6bGOqHAChxOMJMd2s_05O/exec'
+        const form = document.forms['submit-to-google-sheet'];
+        const btnSend = document.querySelector('.btn-send');
+        const btnLoading = document.querySelector('.btn-loading');
+        const alert = document.querySelector('.alert');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            btnLoading.classList.toggle('d-none');
+            btnSend.classList.toggle('d-none');
+            fetch(scriptURL, {
+                    method: 'POST',
+                    body: new FormData(form)
+                })
+                .then(response => {
+                    btnLoading.classList.toggle('d-none');
+                    btnSend.classList.toggle('d-none');
+                    alert.classList.toggle('d-none');
+                    form.reset();
+                    console.log('Success!', response);
+                })
+                .catch(error => console.error('Error!', error.message))
+        })
     </script>
