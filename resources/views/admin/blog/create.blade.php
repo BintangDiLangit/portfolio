@@ -83,6 +83,37 @@
                 });
             });
         </script>
+        {{-- Auto Save --}}
+        {{-- <script>
+            var timeoutId;
+            $('form input, form textarea, form select').on('input propertychange change', function() {
+                console.log('Textarea Change');
+
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(function() {
+                    // Runs 1 second (1000 ms) after the last change
+                    saveToDB();
+                }, 1000);
+            });
+
+            function saveToDB() {
+                console.log('Saving to the db');
+
+                // Now show them we saved and when we did
+                var url = "{{ route('blog.store') }}";
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: $("#page1Form").serialize(),
+                    success: function(data) {
+                        $changesSaved.text(data);
+                    }
+                });
+                return false;
+                var d = new Date();
+                $('.form-status-holder').html('Saved! Last: ' + d.toLocaleTimeString());
+            }
+        </script> --}}
         <script>
             var editor_config = {
                 path_absolute: "/",
