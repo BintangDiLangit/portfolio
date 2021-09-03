@@ -64,8 +64,8 @@
     <script src="{{ asset('../satner/js/jquery.ajaxchimp.min.js') }}"></script>
     <script src="{{ asset('../satner/js/mail-script.js') }}"></script>
     <!--gmaps Js-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-    <script src="{{ asset('../satner/js/gmaps.min.js') }}"></script>
+    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script> --}}
+    {{-- <script src="{{ asset('../satner/js/gmaps.min.js') }}"></script> --}}
     <script src="{{ asset('../satner/js/theme.js') }}"></script>
 
     {{-- Bootstrap 4 --}}
