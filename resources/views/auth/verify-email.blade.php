@@ -1,3 +1,4 @@
+<link rel="icon" href="{{ asset('../satner/img/logo.png') }}" type="image/png">
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
