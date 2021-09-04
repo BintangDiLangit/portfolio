@@ -39,6 +39,9 @@
         }
         titlebar(0);
     </script>
+    {{-- Google Ads --}}
+    <script data-ad-client="ca-pub-4093590736685357" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('../satner/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('../satner/vendors/linericon/style.css') }}">

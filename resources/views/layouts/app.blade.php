@@ -8,6 +8,9 @@
     <link rel="icon" href="{{ asset('../satner/img/logo.png') }}" type="image/png">
     <title>@yield('title')</title>
 
+    {{-- Google ads --}}
+    <script data-ad-client="ca-pub-4093590736685357" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
