@@ -140,6 +140,14 @@
     @include('layouts.landing.newsletter')
     <!--================ End Newsletter Area =================-->
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4093590736685357"
+        crossorigin="anonymous"></script>
+    <!-- Ads_V1 -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4093590736685357" data-ad-slot="4366925422"
+        data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
     @include('layouts.landing.footer')
 </body>
 
