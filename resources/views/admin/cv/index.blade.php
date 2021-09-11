@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="container m-4">
-                    <iframe src="{{ asset('file-cv/cv.pdf') }}"
+                    <iframe src="{{ asset('file-cv/' . $cv->path) }}"
                         style="width: 100%;height: 1000px;border: none;">CV</iframe>
                 </div>
             </div>

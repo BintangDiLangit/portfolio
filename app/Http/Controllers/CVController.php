@@ -9,7 +9,7 @@ class CVController extends Controller
 {
     public function index()
     {
-        $cv = CV::all();
+        $cv = CV::orderBy('created_at', 'desc')->first();
         return view('admin.cv.index', compact('cv'));
     }
     public function store(Request $request)
