@@ -19,18 +19,10 @@ class CVController extends Controller
         ]);
 
         if ($request->hasFile('file')) {
-            $cvv = count(CV::all());
-            if ($cvv == 0) {
-                $cv = new CV;
-                $request->file('file')->move('file-cv/', 'cv.pdf');
-                $cv->path = 'cv.pdf';
-                $cv->save();
-            } else {
-                $cvUpdate = cv::find('1');
-                $request->file('file')->move('file-cv/', 'cv.pdf');
-                $cvUpdate->path = 'cv.pdf';
-                $cvUpdate->update();
-            }
+            $cv = new CV;
+            $request->file('file')->move('file-cv/', $request->file('file')->getClientOriginalName());
+            $cv->path = $request->file('file')->getClientOriginalName();
+            $cv->save();
             return redirect(route('cv.index'))->with('status', 'CV Has been uploaded successfully');
         }
     }
