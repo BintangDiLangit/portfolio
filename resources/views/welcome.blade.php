@@ -17,7 +17,7 @@
                         <div class="banner_content">
                             <h3 class="text-uppercase">Hell0</h3>
                             <h1 class="text-uppercase">I am Bintang Miftaqul Huda</h1>
-                            <h5 class="text-uppercase">Junior Software Engineer</h5>
+                            <h5 class="text-uppercase">Software Engineer</h5>
                             <div class="d-flex align-items-center">
                                 <a class="primary_btn" href="https://www.linkedin.com/in/bintangmfhd/"
                                     target="_blank"><span>LinkedIn</span></a>
@@ -90,8 +90,7 @@
                 @foreach ($skills as $skill)
                     <div class="col-lg-3 col-md-6">
                         <div class="feature_item">
-                            <img src="{{ asset('../skill-images/' . $skill->skill_img) }}" loading="lazy"
-                                alt="">
+                            <img src="{{ asset('skill-images/' . $skill->skill_img) }}" loading="lazy" alt="">
                             <h4>{{ $skill->skill_name }}</h4>
                             <p>{{ $skill->skill_desc }}</p>
                         </div>

@@ -41,7 +41,7 @@
                     <i class="fa fa-copyright" aria-hidden="true"></i>
                     <script>
                         document.write(new Date().getFullYear());
-                    </script> BintangDiLangit | Junior FullStack Web Dev <i class="fa fa-heart-o"
+                    </script> BintangDiLangit | Software Engineer <i class="fa fa-heart-o"
                         aria-hidden="true"></i>
                     by bintangmfhd</a>
                 </p>
