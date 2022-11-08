@@ -4,6 +4,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{{ asset('satner/img/logo.png') }}" type="image/png">
     <title id="val"></title>
+    <meta name="description" content="Bintang Miftaqul Huda, Professional portfolio, freelancers or software engineer.">
+    <meta name="keywords" content="bintangmfhd, resume, cv, vCard, portfolio, responsive, software engineer, programmer">
+    <meta name="robots" content="index, follow, noodp">
+    <meta name="googlebot" content="index, follow">
+    <meta name="google" content="notranslate">
+    <meta property="og:title" content="Bintang - Software Engineer ">
+    <meta property="og:description"
+        content="Bintang Miftaqul Huda, Professional portfolio, freelancers or software engineer.">
+    <meta property="og:image" content="https://bintangmfhd.com/assets/images/preview.png">
+    <meta property="og:url" content="https://bintangmfhd.com/">
     <script language=javascript>
         var rev = "fwd";
 

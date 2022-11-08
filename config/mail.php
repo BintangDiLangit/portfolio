@@ -84,8 +84,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'bintangfoundation@bintangmfhd.tech'),
-        'name' => env('MAIL_FROM_NAME', 'bintangfoundation@bintangmfhd.tech'),
+        'address' => env('MAIL_FROM_ADDRESS', 'superadmin@main.bintangmfhd.com'),
+        'name' => env('MAIL_FROM_NAME', 'superadmin@main.bintangmfhd.com'),
     ],
 
     /*

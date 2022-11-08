@@ -150,14 +150,14 @@
         <div style="position:absolute;left:164.98px;top:251.65px" class="cls_005"><span class="cls_005">has shown his
                 persistence in contributing to writing articles and become</span></div>
         <div style="position:absolute;left:254.70px;top:276.39px" class="cls_005"><span class="cls_005">a </span><span
-                class="cls_006">Beginner Writer</span><span class="cls_005"> of "bintangmfhd.tech/blog".</span></div>
+                class="cls_006">Beginner Writer</span><span class="cls_005"> of "bintangmfhd.com/blog".</span></div>
         <div style="position:absolute;left:158.28px;top:376.04px" class="cls_007"><span class="cls_007">Completed on
                 {{ $timeNow }}</span></div>
         <div style="position:absolute;left:200.28px;top:403.04px" class="cls_007"><img src="{{ $pic2 }}" width=90 alt=""></div>
         <div style="position:absolute;left:170.25px;top:497.05px" class="cls_007"><span class="cls_007">Bintang Miftaqul
                 Huda</span></div>
         <div style="position:absolute;left:185.52px;top:520.07px" class="cls_008"><span class="cls_008">Owner
-                bintangmfhd.tech</span></div>
+                bintangmfhd.com</span></div>
     </div>
 
 </body>
