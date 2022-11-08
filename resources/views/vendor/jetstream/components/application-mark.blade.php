@@ -1,1 +1,1 @@
-<img src="https://bintangmfhd.com/satner/img/logo.png">
+<img src="https://main.bintangmfhd.com/satner/img/logo.png">

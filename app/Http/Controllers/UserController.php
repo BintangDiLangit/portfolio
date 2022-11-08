@@ -57,7 +57,7 @@ class UserController extends Controller
         $pic2 = 'data:image/' . $type2 . ';base64,' . base64_encode($data2);
 
         $dataFinal["email"] = $user->email;
-        $dataFinal["title"] = "From bintangmfhd.com";
+        $dataFinal["title"] = "From main.bintangmfhd.com";
         $dataFinal["body"] = "Selamat atas pencapaiannya";
         $pdf = PDF::loadview('appreciation.certificate', compact('timeNow','user','pic','pic2'));
         Mail::send(['text' => 'appreciation.word'],$dataFinal, function($message)use($dataFinal, $pdf) {
