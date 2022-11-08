@@ -60,7 +60,8 @@
                                 <div class="col-md-3">
                                     <div class="blog_info text-right">
                                         <ul class="blog_meta list">
-                                            <li><a href="#">{{ $blg->creator }}<i class="lnr lnr-user"></i></a></li>
+                                            <li><a href="#">{{ $blg->creator }}<i class="lnr lnr-user"></i></a>
+                                            </li>
                                             <li><a href="#">{{ $blg->updated_at }}<i
                                                         class="lnr lnr-calendar-full"></i></a></li>
                                         </ul>
@@ -117,7 +118,7 @@
                         </aside>
                         <aside class="single_sidebar_widget author_widget">
                             <img class="author_img rounded-circle" height="120px"
-                                src="{{ asset('../satner/img/blog/author2.png') }}" alt="">
+                                src="{{ asset('satner/img/blog/author2.png') }}" alt="">
                             <h4>Bintang Miftaqul Huda</h4>
                             <p>Owner</p>
                             <div class="social_icon">

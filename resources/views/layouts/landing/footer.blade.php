@@ -21,7 +21,7 @@
                     <div class="footer_top flex-column">
                         <div class="footer_logo">
                             <a href="#">
-                                <img src="{{ asset('../satner/img/logo.png') }}" alt="">
+                                <img src="{{ asset('satner/img/logo.png') }}" alt="">
                             </a>
                             <h4>Follow Me</h4>
                         </div>
@@ -52,21 +52,21 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="{{ asset('../satner/js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('../satner/js/popper.js') }}"></script>
-    <script src="{{ asset('../satner/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('../satner/js/stellar.js') }}"></script>
-    <script src="{{ asset('../satner/js/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('../satner/vendors/nice-select/js/jquery.nice-select.min.js') }}"></script>
-    <script src="{{ asset('../satner/vendors/isotope/imagesloaded.pkgd.min.js') }}"></script>
-    <script src="{{ asset('../satner/vendors/isotope/isotope-min.js') }}"></script>
-    <script src="{{ asset('../satner/vendors/owl-carousel/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('../satner/js/jquery.ajaxchimp.min.js') }}"></script>
-    <script src="{{ asset('../satner/js/mail-script.js') }}"></script>
+    <script src="{{ asset('satner/js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('satner/js/popper.js') }}"></script>
+    <script src="{{ asset('satner/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('satner/js/stellar.js') }}"></script>
+    <script src="{{ asset('satner/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('satner/vendors/nice-select/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('satner/vendors/isotope/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('satner/vendors/isotope/isotope-min.js') }}"></script>
+    <script src="{{ asset('satner/vendors/owl-carousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('satner/js/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ asset('satner/js/mail-script.js') }}"></script>
     <!--gmaps Js-->
     {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script> --}}
-    {{-- <script src="{{ asset('../satner/js/gmaps.min.js') }}"></script> --}}
-    <script src="{{ asset('../satner/js/theme.js') }}"></script>
+    {{-- <script src="{{ asset('satner/js/gmaps.min.js') }}"></script> --}}
+    <script src="{{ asset('satner/js/theme.js') }}"></script>
 
     {{-- Bootstrap 4 --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

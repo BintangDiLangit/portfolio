@@ -2,7 +2,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="{{ asset('../satner/img/logo.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('satner/img/logo.png') }}" type="image/png">
     <title id="val"></title>
     <script language=javascript>
         var rev = "fwd";
@@ -43,14 +43,14 @@
     <script data-ad-client="ca-pub-4093590736685357" async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('../satner/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('../satner/vendors/linericon/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('../satner/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('../satner/vendors/owl-carousel/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('../satner/css/magnific-popup.css') }}">
-    <link rel="stylesheet" href="{{ asset('../satner/vendors/nice-select/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('satner/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('satner/vendors/linericon/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('satner/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('satner/vendors/owl-carousel/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('satner/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('satner/vendors/nice-select/css/nice-select.css') }}">
     <!-- main css -->
-    <link rel="stylesheet" href="{{ asset('../satner/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('satner/css/style.css') }}">
 
     {{-- Bootstrap 5 --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -63,6 +63,5 @@
         html {
             scroll-behavior: smooth;
         }
-
     </style>
 </head>

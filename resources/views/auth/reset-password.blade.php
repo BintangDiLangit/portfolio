@@ -1,4 +1,4 @@
-<link rel="icon" href="{{ asset('../satner/img/logo.png') }}" type="image/png">
+<link rel="icon" href="{{ asset('satner/img/logo.png') }}" type="image/png">
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
@@ -14,8 +14,8 @@
 
             <div class="block">
                 <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email"
-                    :value="old('email', $request->email)" required autofocus />
+                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)"
+                    required autofocus />
             </div>
 
             <div class="mt-4">
