@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Portofolio;
 use App\Models\SEO;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PortofolioController extends Controller
 {
@@ -36,8 +37,11 @@ class PortofolioController extends Controller
             $prt->rating = $request->rating;
             $prt->client = $request->client;
             $prt->linkPorto = $request->linkPorto;
-            $request->file('image')->move('portofolio-images/', $request->file('image')->getClientOriginalName());
-            $prt->image = $request->file('image')->getClientOriginalName();
+
+            $filename = 'portfolio' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
+            $request->file('image')->move('portofolio-images/', $filename);
+            $prt->image = $filename;
+
             $prt->additional_description = $request->additional_description;
             if ($request->completed == null) {
                 $prt->completed = 'Still Developed';
@@ -81,8 +85,9 @@ class PortofolioController extends Controller
         $prt->client = $request->client;
         $prt->linkPorto = $request->linkPorto;
         if ($request->hasFile('image')) {
-            $request->file('image')->move('portofolio-images/', $request->file('image')->getClientOriginalName());
-            $prt->image = $request->file('image')->getClientOriginalName();
+            $filename = 'portfolio' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
+            $request->file('image')->move('portofolio-images/', $filename);
+            $prt->image = $filename;
         }
         $prt->additional_description = $request->additional_description;
         if ($request->completed == null) {

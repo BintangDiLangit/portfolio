@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CV;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CVController extends Controller
 {
@@ -20,8 +21,9 @@ class CVController extends Controller
 
         if ($request->hasFile('file')) {
             $cv = new CV;
-            $request->file('file')->move('file-cv/', $request->file('file')->getClientOriginalName());
-            $cv->path = $request->file('file')->getClientOriginalName();
+            $filename = 'cv' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
+            $request->file('file')->move('file-cv/', $filename);
+            $cv->path = $filename;
             $cv->save();
             return redirect(route('cv.index'))->with('status', 'CV Has been uploaded successfully');
         }
