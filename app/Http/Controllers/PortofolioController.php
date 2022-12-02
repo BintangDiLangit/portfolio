@@ -21,7 +21,7 @@ class PortofolioController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'title'    => 'required|string|max:28|min:5',
+            'title'    => 'required|string|max:255|min:1',
             'description'    => 'required|string',
             'rating'    => 'required|numeric',
             'client'    => 'required|string',
@@ -69,7 +69,7 @@ class PortofolioController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'title'    => 'required|string|max:28|min:5',
+            'title'    => 'required|string|max:255|min:1',
             'description'    => 'required|string',
             'rating'    => 'required|numeric',
             'client'    => 'required|string',
