@@ -103,7 +103,7 @@ class SEOController extends Controller
             $filename = 'main_image' . uniqid() . strtolower(Str::random(5)) . '.' . $data['main_image']->extension();
             $request->file('main_image')->move('storage/main_image/', $filename);
             $seo->forceFill([
-                'main_image' => '/storage/main_image/' . $filename
+                'main_image' => '/public/storage/main_image/' . $filename
             ])->save();
         }
 
