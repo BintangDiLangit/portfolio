@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Portofolio;
+use App\Models\SEO;
 use Illuminate\Http\Request;
 
 class PortofolioController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $portofolios = Portofolio::orderBy('updated_at', 'desc')->get();
-        return view('admin.portofolio.index', compact('portofolios') );
+        return view('admin.portofolio.index', compact('portofolios'));
     }
-    public function create(){
+    public function create()
+    {
         return view('admin.portofolio.create');
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $this->validate(request(), [
             'title'    => 'required|string|max:28|min:5',
             'description'    => 'required|string',
@@ -25,25 +29,31 @@ class PortofolioController extends Controller
             'additional_description'    => 'nullable|string',
             'completed' => 'nullable|string',
         ]);
-        if ($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $prt = new Portofolio();
             $prt->title = $request->title;
             $prt->description = $request->description;
             $prt->rating = $request->rating;
             $prt->client = $request->client;
             $prt->linkPorto = $request->linkPorto;
-            $request->file('image')->move('portofolio-images/',$request->file('image')->getClientOriginalName());
+            $request->file('image')->move('portofolio-images/', $request->file('image')->getClientOriginalName());
             $prt->image = $request->file('image')->getClientOriginalName();
             $prt->additional_description = $request->additional_description;
             if ($request->completed == null) {
                 $prt->completed = 'Still Developed';
-            }else{
+            } else {
                 $prt->completed = $request->completed;
             }
             $prt->save();
         }
 
-        session()->flash('message','Portofolio has been added');
+        $seo = SEO::first();
+        $portfolio = Portofolio::count();
+        $seo->forceFill([
+            'project_done' => $portfolio
+        ])->save();
+
+        session()->flash('message', 'Portofolio has been added');
         return redirect(route('portofolio.index'));
     }
 
@@ -52,7 +62,8 @@ class PortofolioController extends Controller
         $porto = Portofolio::where('id', $id)->first();
         return view('admin.portofolio.edit', compact('porto'));
     }
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $this->validate(request(), [
             'title'    => 'required|string|max:28|min:5',
             'description'    => 'required|string',
@@ -69,19 +80,19 @@ class PortofolioController extends Controller
         $prt->rating = $request->rating;
         $prt->client = $request->client;
         $prt->linkPorto = $request->linkPorto;
-        if ($request->hasFile('image')){
-            $request->file('image')->move('portofolio-images/',$request->file('image')->getClientOriginalName());
+        if ($request->hasFile('image')) {
+            $request->file('image')->move('portofolio-images/', $request->file('image')->getClientOriginalName());
             $prt->image = $request->file('image')->getClientOriginalName();
         }
         $prt->additional_description = $request->additional_description;
         if ($request->completed == null) {
             $prt->completed = 'Still Developed';
-        }else{
+        } else {
             $prt->completed = $request->completed;
         }
         $prt->update();
 
-        session()->flash('message','Portofolio has been updated');
+        session()->flash('message', 'Portofolio has been updated');
         return redirect(route('portofolio.index'));
     }
 
@@ -89,7 +100,11 @@ class PortofolioController extends Controller
     {
         $portofolio = Portofolio::find($id);
         $portofolio->delete();
+        $seo = SEO::first();
+        $portfolio = Portofolio::count();
+        $seo->forceFill([
+            'project_done' => $portfolio
+        ])->save();
         return redirect(route('portofolio.index'));
     }
-
 }

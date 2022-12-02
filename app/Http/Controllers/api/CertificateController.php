@@ -1,15 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Models\Certificate;
+namespace App\Http\Controllers\api;
 
-class ApiCertificateController extends Controller
+use App\Http\Controllers\Controller;
+use App\Models\Certificate;
+use Illuminate\Http\Request;
+
+class CertificateController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $certificates = Certificate::all();
         return response()->json($certificates);
     }
-    public function show($id){
+    public function show($id)
+    {
         $certificate = Certificate::find($id);
         return response()->json($certificate);
     }
