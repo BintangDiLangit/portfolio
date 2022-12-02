@@ -21,7 +21,7 @@ class CVController extends Controller
 
         if ($request->hasFile('file')) {
             $cv = CV::first();
-            $filename = 'cv' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
+            $filename = 'cv' . uniqid() . strtolower(Str::random(10)) . '.' . $request->file->extension();
             $request->file('file')->move('file-cv/', $filename);
             $cv->path = $filename;
             $cv->save();
