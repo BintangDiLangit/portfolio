@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\SEO;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ClientController extends Controller
 {
@@ -28,8 +29,11 @@ class ClientController extends Controller
             $cli = new Client();
             $cli->name = $request->name;
             $cli->clientMessage = $request->clientMessage;
-            $request->file('photo')->move('client-images/', $request->file('photo')->getClientOriginalName());
-            $cli->photo = $request->file('photo')->getClientOriginalName();
+
+            $filename = 'client_image' . uniqid() . strtolower(Str::random(10)) . '.' . $request->photo->extension();
+            $request->file('photo')->move('client-images/', $filename);
+            $cli->photo = $filename;
+
             $cli->save();
         }
 
@@ -58,9 +62,9 @@ class ClientController extends Controller
             $cli = Client::find($id);
             $cli->name = $request->name;
             $cli->clientMessage = $request->clientMessage;
-            $request->file('photo')->move('client-images/', $request->file('photo')->getClientOriginalName());
-            $cli->photo = $request->file('photo')->getClientOriginalName();
-            $cli->update();
+            $filename = 'client_image' . uniqid() . strtolower(Str::random(10)) . '.' . $request->photo->extension();
+            $request->file('photo')->move('client-images/', $filename);
+            $cli->photo = $filename;
         }
         session()->flash('message', 'Client has been updated');
         return redirect(route('client.index'));

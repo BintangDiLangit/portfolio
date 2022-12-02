@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -60,8 +61,10 @@ class BlogController extends Controller
             $blg->creator = Auth::user()->name;
             $blg->user_id = Auth::user()->id;
             $blg->link_route = $c;
-            $request->file('imageHeader')->move('blog-images/', $request->file('imageHeader')->getClientOriginalName());
-            $blg->imageHeader = $request->file('imageHeader')->getClientOriginalName();
+
+            $filename = 'blog_img' . uniqid() . strtolower(Str::random(10)) . '.' . $request->imageHeader->extension();
+            $request->file('imageHeader')->move('blog-images/', $filename);
+            $blg->imageHeader = $filename;
             if ($blg->save()) {
                 $blg->tags()->attach($tag_ids);
             }
@@ -92,8 +95,9 @@ class BlogController extends Controller
         $blg->link_route = $c;
         $blg->content = $request->content;
         if ($request->hasFile('imageHeader')) {
-            $request->file('imageHeader')->move('blog-images/', $request->file('imageHeader')->getClientOriginalName());
-            $blg->imageHeader = $request->file('imageHeader')->getClientOriginalName();
+            $filename = 'blog_img' . uniqid() . strtolower(Str::random(10)) . '.' . $request->imageHeader->extension();
+            $request->file('imageHeader')->move('blog-images/', $filename);
+            $blg->imageHeader = $filename;
         }
         $blg->update();
         return redirect(route('blog.index'))->with('success', 'Blog has been updated');

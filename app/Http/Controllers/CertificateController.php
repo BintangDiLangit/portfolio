@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Certificate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CertificateController extends Controller
 {
@@ -24,17 +25,20 @@ class CertificateController extends Controller
             'linkCert'    => 'nullable',
             'type'    => 'required',
         ]);
-        if ($request->hasFile('imgCert')){
+        if ($request->hasFile('imgCert')) {
             $crt = new Certificate();
             $crt->name = $request->name;
             $crt->linkCert = $request->linkCert;
             $crt->type = $request->type;
-            $request->file('imgCert')->move('certificate-images/',$request->file('imgCert')->getClientOriginalName());
-            $crt->imgCert = $request->file('imgCert')->getClientOriginalName();
+
+            $filename = 'cert' . uniqid() . strtolower(Str::random(10)) . '.' . $request->imgCert->extension();
+            $request->file('imgCert')->move('certificate-images/', $filename);
+            $crt->imgCert = $filename;
+
             $crt->save();
         }
 
-        session()->flash('message','Certificate has been added');
+        session()->flash('message', 'Certificate has been added');
         return redirect(route('certificate.index'));
     }
     public function edit($id)
@@ -54,14 +58,14 @@ class CertificateController extends Controller
         $crt->name = $request->name;
         $crt->linkCert = $request->linkCert;
         $crt->type = $request->type;
-        if ($request->hasFile('imgCert')){
-            $request->file('imgCert')->move('certificate-images/',$request->file('imgCert')->getClientOriginalName());
-            $crt->imgCert = $request->file('imgCert')->getClientOriginalName();
+        if ($request->hasFile('imgCert')) {
+            $filename = 'cert' . uniqid() . strtolower(Str::random(10)) . '.' . $request->imgCert->extension();
+            $request->file('imgCert')->move('certificate-images/', $filename);
+            $crt->imgCert = $filename;
         }
-            $crt->update();
-        session()->flash('message','Certificate has been updated');
+        $crt->update();
+        session()->flash('message', 'Certificate has been updated');
         return redirect(route('certificate.index'));
-
     }
     public function destroy($id)
     {
