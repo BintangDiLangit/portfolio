@@ -65,6 +65,7 @@ class ClientController extends Controller
             $filename = 'client_image' . uniqid() . strtolower(Str::random(10)) . '.' . $request->photo->extension();
             $request->file('photo')->move('client-images/', $filename);
             $cli->photo = $filename;
+            $cli->save();
         }
         session()->flash('message', 'Client has been updated');
         return redirect(route('client.index'));
