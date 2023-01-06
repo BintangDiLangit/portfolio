@@ -20,11 +20,16 @@ class PortfolioController extends Controller
     public function show($id)
     {
         $porto = Portofolio::where('id', $id)->first();
-        $countRating = $porto->rating;
+        if (isset($porto)) {
+            $countRating = $porto->rating;
+            return response()->json([
+                'message' => 'Detail Portfolio',
+                'data' => $porto,
+                'rating_porto' => $countRating
+            ], Response::HTTP_OK);
+        }
         return response()->json([
-            'message' => 'Detail Portfolio',
-            'data' => $porto,
-            'rating_porto' => $countRating
-        ], Response::HTTP_OK);
+            'message' => 'Detail Portfolio Not Found'
+        ], Response::HTTP_NOT_FOUND);
     }
 }
