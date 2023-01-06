@@ -33,8 +33,10 @@ class WelcomeController extends Controller
         if (isset($porto)) {
             $countRating = $porto->rating;
             return view('portofolio.show', compact('porto', 'countRating'));
+        } else {
+            $portofolios = Portofolio::orderBy('updated_at', 'desc')->get();
+            return view('portofolio.index', compact('portofolios'));
         }
-        return redirect()->back();
     }
 
     public function indexAchievement()
