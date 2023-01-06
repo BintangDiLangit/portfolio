@@ -30,8 +30,11 @@ class WelcomeController extends Controller
     public function show($id)
     {
         $porto = Portofolio::where('id', $id)->first();
-        $countRating = $porto->rating;
-        return view('portofolio.show', compact('porto', 'countRating'));
+        if (isset($porto)) {
+            $countRating = $porto->rating;
+            return view('portofolio.show', compact('porto', 'countRating'));
+        }
+        return redirect()->back();
     }
 
     public function indexAchievement()
