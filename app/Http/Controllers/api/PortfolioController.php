@@ -36,7 +36,7 @@ class PortfolioController extends Controller
 
     public function loadMore($skip)
     {
-        $portfolios = Portofolio::skip($skip)->take(10)->get();
+        $portfolios = Portofolio::orderBy('updated_at', 'desc')->skip($skip)->take(10)->get();
         return response()->json([
             'message' => 'List All Portfolio',
             'data' => $portfolios,
