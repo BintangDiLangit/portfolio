@@ -33,4 +33,14 @@ class PortfolioController extends Controller
             'message' => 'Detail Portfolio Not Found'
         ], Response::HTTP_NOT_FOUND);
     }
+
+    public function loadMore($skip)
+    {
+        $portfolios = Portofolio::skip($skip)->take(10)->get();
+        return response()->json([
+            'message' => 'List All Portfolio',
+            'data' => $portfolios,
+            'count' => count($portfolios)
+        ]);
+    }
 }
