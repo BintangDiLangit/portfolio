@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\CVController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PortofolioController;
@@ -49,11 +50,14 @@ Route::group(['middleware' => 'isAdmin'], function () {
     Route::resource('admin/client', ClientController::class)->middleware('auth');
     Route::resource('admin/user', UserController::class)->middleware('auth');
     Route::resource('admin/skill', SkillController::class)->middleware('auth');
+    Route::resource('admin/competition', CompetitionController::class)->middleware('auth');
     Route::get('admin/seo', [SEOController::class, 'index'])->middleware('auth')->name('admin.seo');
     Route::post('admin/seo/save', [SEOController::class, 'update'])->middleware('auth');
     Route::prefix('/admin/cv')->group(function () {
-        Route::get('/', [CVController::class, 'index'])->name('cv.index')->middleware('auth');;
-        Route::post('/', [CVController::class, 'store'])->name('cv.store')->middleware('auth');;
+        Route::get('/', [CVController::class, 'index'])->name('cv.index')->middleware('auth');
+        ;
+        Route::post('/', [CVController::class, 'store'])->name('cv.store')->middleware('auth');
+        ;
     });
 });
 
