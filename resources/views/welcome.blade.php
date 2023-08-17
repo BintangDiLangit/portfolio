@@ -21,9 +21,8 @@
                             <div class="d-flex align-items-center">
                                 <a class="primary_btn" href="https://www.linkedin.com/in/bintangmfhd/"
                                     target="_blank"><span>LinkedIn</span></a>
-                                <a class="primary_btn tr-bg" href="{{ asset('file-cv/' . $cv->path) }}"
-                                    target="_blank"><span>Get
-                                        CV</span></a>
+                                <a class="primary_btn tr-bg" href="https://bintangmfhd.com"
+                                    target="_blank"><span>Portfolio V2</span></a>
                             </div>
                         </div>
                     </div>
