@@ -11,10 +11,11 @@ class PortfolioController extends Controller
 {
     public function index(Request $request)
     {
-        $portofolios = Portofolio::orderBy('updated_at', 'desc')->get();
+        $portofolios = Portofolio::orderBy('updated_at', 'desc')->take(10)->get();
         return response()->json([
             'message' => 'List All Portfolio',
             'data' => $portofolios,
+            'count' => count($portofolios)
         ], Response::HTTP_OK);
     }
     public function show($id)
