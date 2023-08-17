@@ -17,7 +17,9 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            @error('file') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('file')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                             <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
                             <div class="file-upload">
                                 <button class="file-upload-btn" type="button"
@@ -45,7 +47,7 @@
                 </div>
 
                 <div class="container m-4">
-                    <iframe src="{{ asset('file-cv/' . $cv->path) }}"
+                    <iframe src="{{ env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/storage/file-cv/' . $cv->path }}"
                         style="width: 100%;height: 1000px;border: none;">CV</iframe>
                 </div>
             </div>

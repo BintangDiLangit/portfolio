@@ -33,12 +33,12 @@
                                 <td> {{ $skill->updated_at }} </td>
                                 <td>
                                     <img style="width: 100px"
-                                        src="{{ asset('../skill-images/' . $skill->skill_img) }}">
+                                        src="{{ env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/storage/skill-images/' . $skill->skill_img }}">
                                 </td>
                                 <td> {{ $skill->skill_desc }} </td>
                                 <td>
-                                    <a href="{{ route('skill.edit', ['skill' => $skill]) }}"
-                                        class="btn btn-primary"><i class="fa fa-pencil"></i> Edit </a>
+                                    <a href="{{ route('skill.edit', ['skill' => $skill]) }}" class="btn btn-primary"><i
+                                            class="fa fa-pencil"></i> Edit </a>
                                     <a href="{{ route('skill.destroy', ['skill' => $skill]) }}" type="button"
                                         class="btn btn-danger" data-toggle="modal"
                                         data-target="#deleteConf{{ $skill->id }}"><i class="fa fa-trash"></i>

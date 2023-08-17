@@ -28,11 +28,12 @@
                                 <td> {{ $cli->name }} </td>
                                 <td> {{ $cli->clientMessage }} </td>
                                 <td>
-                                    <img style="width: 100px" src="{{ asset('../client-images/' . $cli->photo) }}">
+                                    <img style="width: 100px"
+                                        src="{{ env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/storage/client-images/' . $cli->photo }}">
                                 </td>
                                 <td>
-                                    <a href="{{ route('client.edit', ['client' => $cli]) }}"
-                                        class="btn btn-primary"><i class="fa fa-pencil"></i> Edit </a>
+                                    <a href="{{ route('client.edit', ['client' => $cli]) }}" class="btn btn-primary"><i
+                                            class="fa fa-pencil"></i> Edit </a>
                                     <a href="{{ route('client.destroy', ['client' => $cli]) }}" type="button"
                                         class="btn btn-danger" data-toggle="modal"
                                         data-target="#deleteConf{{ $cli->id }}"><i class="fa fa-trash"></i>

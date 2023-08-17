@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\SEO;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ClientController extends Controller
@@ -21,8 +22,8 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'name'    => 'required|string|max:100|min:5',
-            'photo'    => 'required|image',
+            'name' => 'required|string|max:100|min:5',
+            'photo' => 'required|image',
             'clientMessage' => 'required|string|min:5',
         ]);
         if ($request->hasFile('photo')) {
@@ -31,7 +32,8 @@ class ClientController extends Controller
             $cli->clientMessage = $request->clientMessage;
 
             $filename = 'client_image' . uniqid() . strtolower(Str::random(10)) . '.' . $request->photo->extension();
-            $request->file('photo')->move('client-images/', $filename);
+            $path = $request->file('photo')->storeAs('storage/client-images/', $filename, 's3');
+            Storage::disk('s3')->setVisibility($path, 'public');
             $cli->photo = $filename;
 
             $cli->save();
@@ -54,18 +56,22 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'name'    => 'required|string|max:100|min:5',
-            'photo'    => 'required|image',
-            'clientMessage'    => 'nullable|string',
+            'name' => 'required|string|max:100|min:5',
+            'photo' => 'required|image',
+            'clientMessage' => 'nullable|string',
         ]);
         if ($request->hasFile('photo')) {
             $cli = Client::find($id);
+            $oldPhoto = $cli->photo;
             $cli->name = $request->name;
             $cli->clientMessage = $request->clientMessage;
             $filename = 'client_image' . uniqid() . strtolower(Str::random(10)) . '.' . $request->photo->extension();
-            $request->file('photo')->move('client-images/', $filename);
+            $path = $request->file('photo')->storeAs('storage/client-images/', $filename, 's3');
+            Storage::disk('s3')->setVisibility($path, 'public');
             $cli->photo = $filename;
             $cli->save();
+
+            Storage::disk('s3')->delete('storage/client-images/' . $oldPhoto);
         }
         session()->flash('message', 'Client has been updated');
         return redirect(route('client.index'));
@@ -73,6 +79,7 @@ class ClientController extends Controller
     public function destroy($id)
     {
         $client = Client::find($id);
+        Storage::disk('s3')->delete('storage/client-images/' . $client->photo);
         $client->delete();
         $seo = SEO::first();
         $client = Client::count();

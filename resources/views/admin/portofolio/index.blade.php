@@ -33,13 +33,13 @@
                                 </td>
                                 <td>
                                     <img style="width: 250px"
-                                        src="{{ asset('../portofolio-images/' . $porto->image) }}">
+                                        src="{{ env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/storage/portofolio-images/' . $porto->image }}">
                                 </td>
                                 <td>
                                     <a href="{{ route('portofolio.edit', ['portofolio' => $porto]) }}"
                                         class="btn btn-primary"><i class="fa fa-pencil"></i> Edit </a>
-                                    <a href="{{ route('portofolio.destroy', ['portofolio' => $porto]) }}"
-                                        type="button" class="btn btn-danger" data-toggle="modal"
+                                    <a href="{{ route('portofolio.destroy', ['portofolio' => $porto]) }}" type="button"
+                                        class="btn btn-danger" data-toggle="modal"
                                         data-target="#deleteConf{{ $porto->id }}"><i class="fa fa-trash"></i>
                                         Delete
                                     </a>

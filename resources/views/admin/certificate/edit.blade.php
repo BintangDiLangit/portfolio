@@ -20,14 +20,18 @@
                             <label for="exampleFormControlInput1">Title Certificate</label>
                             <input type="text" name="name" class="form-control" id="exampleFormControlInput1"
                                 placeholder="name" value="{{ $cert->name }}">
-                            @error('name') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('name')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Link Certificate <span
                                     class="text-muted">(Optional)</span></label>
                             <input type="text" class="form-control" id="exampleFormControlInput1"
                                 placeholder="paste link here" name="linkCert" value="{{ $cert->linkCert }}">
-                            @error('linkCert') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('linkCert')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Certificate Type <span></label>
@@ -55,13 +59,17 @@
                                 @endif
 
                             </select>
-                            @error('type') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('type')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Upload Certificate</label>
-                            @error('imgCert') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('imgCert')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                             <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-                            <img src="{{ asset('../certificate-images/' . $cert->imgCert) }}"
+                            <img src="{{ env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/storage/certificate-images/' . $cert->imgCert }}"
                                 class="rounded mx-auto d-block" style="width: 300px" alt="...">
                             <div class="file-upload">
                                 <button class="file-upload-btn" type="button"
@@ -78,8 +86,8 @@
                                 <div class="file-upload-content">
                                     <img class="file-upload-image" src="#" alt="your image" />
                                     <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
-                                                class="image-title">Uploaded Image</span></button>
+                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove
+                                            <span class="image-title">Uploaded Image</span></button>
                                     </div>
                                 </div>
                             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Competition;
 use App\Models\SEO;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CompetitionController extends Controller
@@ -37,7 +38,8 @@ class CompetitionController extends Controller
                 $compt->date = $request->date;
 
                 $filename = 'competition' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
-                $request->file('image')->move('storage/competition-images/', $filename);
+                $path = $request->file('image')->storeAs('storage/competition-images/', $filename, 's3');
+                Storage::disk('s3')->setVisibility($path, 'public');
                 $compt->image = $filename;
 
                 $compt->save();
@@ -70,9 +72,12 @@ class CompetitionController extends Controller
             $competition->date = $request->date;
 
             if ($request->hasFile('image')) {
+                $oldImage = $competition->image;
                 $filename = 'competition' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
-                $request->file('image')->move('storage/competition-images/', $filename);
+                $path = $request->file('image')->storeAs('storage/competition-images/', $filename, 's3');
+                Storage::disk('s3')->setVisibility($path, 'public');
                 $competition->image = $filename;
+                Storage::disk('s3')->delete('storage/competition-images/' . $oldImage);
             }
 
             $competition->save();
@@ -94,6 +99,7 @@ class CompetitionController extends Controller
 
     public function destroy(Competition $competition)
     {
+        Storage::disk('s3')->delete('storage/competition-images/' . $competition->image);
         $competition->delete();
         $seo = SEO::first();
         $competitionCount = Competition::count();

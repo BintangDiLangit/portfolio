@@ -37,7 +37,7 @@
                                 </td>
                                 <td>
                                     <img style="width: 100px"
-                                        src="{{ asset('../certificate-images/' . $cert->imgCert) }}">
+                                        src="{{ env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/storage/certificate-images/' . $cert->imgCert }}">
                                 </td>
                                 <td>
                                     <a href="{{ route('certificate.edit', ['certificate' => $cert]) }}"

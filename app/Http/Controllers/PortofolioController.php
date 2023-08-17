@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Portofolio;
 use App\Models\SEO;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PortofolioController extends Controller
@@ -21,13 +22,13 @@ class PortofolioController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'title'    => 'required|string|max:255|min:1',
-            'description'    => 'required|string',
-            'rating'    => 'required|numeric',
-            'client'    => 'required|string',
-            'linkPorto'    => 'required',
-            'image'    => 'required|image',
-            'additional_description'    => 'nullable|string',
+            'title' => 'required|string|max:255|min:1',
+            'description' => 'required|string',
+            'rating' => 'required|numeric',
+            'client' => 'required|string',
+            'linkPorto' => 'required',
+            'image' => 'required|image',
+            'additional_description' => 'nullable|string',
             'completed' => 'nullable|string',
         ]);
         if ($request->hasFile('image')) {
@@ -39,7 +40,8 @@ class PortofolioController extends Controller
             $prt->linkPorto = $request->linkPorto;
 
             $filename = 'portfolio' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
-            $request->file('image')->move('portofolio-images/', $filename);
+            $path = $request->file('image')->storeAs('storage/portofolio-images/', $filename, 's3');
+            Storage::disk('s3')->setVisibility($path, 'public');
             $prt->image = $filename;
 
             $prt->additional_description = $request->additional_description;
@@ -69,14 +71,14 @@ class PortofolioController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'title'    => 'required|string|max:255|min:1',
-            'description'    => 'required|string',
-            'rating'    => 'required|numeric',
-            'client'    => 'required|string',
-            'linkPorto'    => 'required',
-            'image'    => 'nullable|image',
-            'additional_description'    => 'nullable|string',
-            'completed'    => 'nullable|string',
+            'title' => 'required|string|max:255|min:1',
+            'description' => 'required|string',
+            'rating' => 'required|numeric',
+            'client' => 'required|string',
+            'linkPorto' => 'required',
+            'image' => 'nullable|image',
+            'additional_description' => 'nullable|string',
+            'completed' => 'nullable|string',
         ]);
         $prt = Portofolio::find($id);
         $prt->title = $request->title;
@@ -85,9 +87,14 @@ class PortofolioController extends Controller
         $prt->client = $request->client;
         $prt->linkPorto = $request->linkPorto;
         if ($request->hasFile('image')) {
+            $oldImage = $prt->image;
+
             $filename = 'portfolio' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
-            $request->file('image')->move('portofolio-images/', $filename);
+            $path = $request->file('image')->storeAs('storage/portofolio-images/', $filename, 's3');
+            Storage::disk('s3')->setVisibility($path, 'public');
             $prt->image = $filename;
+
+            Storage::disk('s3')->delete('storage/portofolio-images/' . $oldImage);
         }
         $prt->additional_description = $request->additional_description;
         if ($request->completed == null) {
@@ -104,6 +111,7 @@ class PortofolioController extends Controller
     public function destroy($id)
     {
         $portofolio = Portofolio::find($id);
+        Storage::disk('s3')->delete('storage/portofolio-images/' . $portofolio->image);
         $portofolio->delete();
         $seo = SEO::first();
         $portfolio = Portofolio::count();

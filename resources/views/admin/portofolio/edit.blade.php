@@ -20,56 +20,69 @@
                             <label for="exampleFormControlInput1">Title Portofolio</label>
                             <input type="text" name="title" class="form-control" id="exampleFormControlInput1"
                                 placeholder="title" value="{{ $porto->title }}">
-                            @error('title') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('title')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Rating <span class="text-danger">*</span></label>
                             <input type="number" name="rating" class="form-control" id="exampleFormControlInput1"
                                 placeholder="rating" value="{{ $porto->rating }}">
-                            @error('rating') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('rating')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Client <span class="text-danger">*</span></label>
                             <input type="text" name="client" class="form-control" id="exampleFormControlInput1"
                                 placeholder="client" value="{{ $porto->client }}">
-                            @error('client') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('client')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Completed Status <span class="text-muted">(leave it
                                     blank if it's still development stage)</span></label>
                             <input type="date" name="completed" class="form-control" id="exampleFormControlInput1"
                                 value="{{ $porto->completed }}">
-                            @error('completed') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('completed')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Upload Image</label>
-                            <img src="{{ asset('../portofolio-images/' . $porto->image) }}"
+                            <img src="{{ env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/storage/portofolio-images/' . $porto->image }}"
                                 class="rounded mx-auto d-block" style="width: 300px" alt="...">
                             <input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
 
-                            @error('image') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('image')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Link Portofolio</label>
                             <input type="text" class="form-control" id="exampleFormControlInput1"
                                 placeholder="paste link here" name="linkPorto" value="{{ $porto->linkPorto }}">
-                            @error('linkPorto') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('linkPorto')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Description</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                placeholder="description portofolio"
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="description portofolio"
                                 name="description">{{ $porto->description }}</textarea>
-                            @error('description') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('description')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Additional Description <span
                                     class="text-muted">(Optional)</span></label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                placeholder="additional description"
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="additional description"
                                 name="additional_description">{{ $porto->additional_description }}</textarea>
-                            @error('additional_description') <span
-                                class="text-red-500">{{ $message }}</span>@enderror
+                            @error('additional_description')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-success float-right mb-3">Save</button>
                         <a class="btn btn-danger float-right mb-3 mr-2"

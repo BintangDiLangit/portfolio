@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Certificate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CertificateController extends Controller
@@ -20,10 +21,10 @@ class CertificateController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'name'    => 'required|string|max:100|min:5',
-            'imgCert'    => 'required|image',
-            'linkCert'    => 'nullable',
-            'type'    => 'required',
+            'name' => 'required|string|max:100|min:5',
+            'imgCert' => 'required|image',
+            'linkCert' => 'nullable',
+            'type' => 'required',
         ]);
         if ($request->hasFile('imgCert')) {
             $crt = new Certificate();
@@ -32,7 +33,8 @@ class CertificateController extends Controller
             $crt->type = $request->type;
 
             $filename = 'cert' . uniqid() . strtolower(Str::random(10)) . '.' . $request->imgCert->extension();
-            $request->file('imgCert')->move('certificate-images/', $filename);
+            $path = $request->file('imgCert')->storeAs('storage/certificate-images/', $filename, 's3');
+            Storage::disk('s3')->setVisibility($path, 'public');
             $crt->imgCert = $filename;
 
             $crt->save();
@@ -49,19 +51,22 @@ class CertificateController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'name'    => 'required|string|max:100|min:5',
-            'imgCert'    => 'nullable|image',
-            'linkCert'    => 'nullable|string',
-            'type'    => 'required',
+            'name' => 'required|string|max:100|min:5',
+            'imgCert' => 'nullable|image',
+            'linkCert' => 'nullable|string',
+            'type' => 'required',
         ]);
         $crt = Certificate::find($id);
         $crt->name = $request->name;
         $crt->linkCert = $request->linkCert;
         $crt->type = $request->type;
         if ($request->hasFile('imgCert')) {
+            $oldImage = $crt->imgCert;
             $filename = 'cert' . uniqid() . strtolower(Str::random(10)) . '.' . $request->imgCert->extension();
-            $request->file('imgCert')->move('certificate-images/', $filename);
+            $path = $request->file('imgCert')->storeAs('storage/certificate-images/', $filename, 's3');
+            Storage::disk('s3')->setVisibility($path, 'public');
             $crt->imgCert = $filename;
+            Storage::disk('s3')->delete('storage/certificate-images/' . $oldImage);
         }
         $crt->update();
         session()->flash('message', 'Certificate has been updated');
@@ -70,6 +75,7 @@ class CertificateController extends Controller
     public function destroy($id)
     {
         $certificate = Certificate::find($id);
+        Storage::disk('s3')->delete('storage/certificate-images/' . $certificate->imgCert);
         $certificate->delete();
         return redirect(route('certificate.index'));
     }

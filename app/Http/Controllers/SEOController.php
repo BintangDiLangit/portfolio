@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SEO;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class SEOController extends Controller
@@ -100,11 +101,15 @@ class SEOController extends Controller
         }
 
         if ($request->hasFile('main_image')) {
+            $oldImage = $seo->main_image;
             $filename = 'main_image' . uniqid() . strtolower(Str::random(5)) . '.' . $data['main_image']->extension();
-            $request->file('main_image')->move('storage/main_image/', $filename);
+            $path = $request->file('main_image')->storeAs('storage/main_image/', $filename, 's3');
+            Storage::disk('s3')->setVisibility($path, 'public');
             $seo->forceFill([
-                'main_image' => '/storage/main_image/' . $filename
+                'main_image' => $filename
             ])->save();
+
+            Storage::disk('s3')->delete('storage/main_image/' . $oldImage);
         }
 
         $seo = SEO::first();
