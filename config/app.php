@@ -67,7 +67,9 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Jakarta','locale' => 'id','faker_locale' => 'id_ID',
+    'timezone' => 'Asia/Jakarta',
+    'locale' => 'id',
+    'faker_locale' => 'id_ID',
 
     /*
     |--------------------------------------------------------------------------
@@ -136,9 +138,9 @@ return [
 
     'providers' => [
 
-        /*
-         * Laravel Framework Service Providers...
-         */
+            /*
+             * Laravel Framework Service Providers...
+             */
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -162,22 +164,24 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        /*
-         * Package Service Providers...
-         */
+            /*
+             * Package Service Providers...
+             */
 
-        /*
-         * Application Service Providers...
-         */
+            /*
+             * Application Service Providers...
+             */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+            // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
 
         Barryvdh\DomPDF\ServiceProvider::class,
+
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -233,6 +237,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

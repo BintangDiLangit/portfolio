@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Skill;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class SkillController extends Controller
 {
@@ -20,7 +19,7 @@ class SkillController extends Controller
         return view('admin.skill.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, ImageService $imageService)
     {
         $this->validate(request(), [
             'skill_name' => 'required|string|max:255',
@@ -31,11 +30,9 @@ class SkillController extends Controller
             $skl = new Skill();
             $skl->skill_name = $request->skill_name;
             $skl->skill_desc = $request->skill_desc;
-            $request->file('skill_img')->move('skill-images/', $request->file('skill_img')->getClientOriginalName());
 
-            $filename = 'skill' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
-            $path = $request->file('skill_img')->storeAs('storage/skill-images/', $filename, 's3');
-            Storage::disk('s3')->setVisibility($path, 'public');
+            $filename = $imageService->storeImage($request->file('skill_img'), 'storage/skill-images/');
+
             $skl->skill_img = $filename;
 
             $skl->save();
@@ -51,7 +48,7 @@ class SkillController extends Controller
         return view('admin.skill.edit', compact('skill'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, ImageService $imageService)
     {
         $this->validate(request(), [
             'skill_name' => 'required|string|max:255',
@@ -63,14 +60,8 @@ class SkillController extends Controller
         $skl->skill_desc = $request->skill_desc;
         if ($request->hasFile('skill_img')) {
             $oldImage = $skl->skill_img;
-
-            $filename = 'skill' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
-
-            $path = $request->file('skill_img')->storeAs('storage/skill-images/', $filename, 's3');
-            Storage::disk('s3')->setVisibility($path, 'public');
-
+            $filename = $imageService->storeImage($request->file('skill_img'), 'storage/skill-images/', $oldImage);
             $skl->skill_img = $filename;
-            Storage::disk('s3')->delete('storage/skill-images/' . $oldImage);
         }
         $skl->update();
 
@@ -78,10 +69,10 @@ class SkillController extends Controller
         return redirect(route('skill.index'));
     }
 
-    public function destroy($id)
+    public function destroy($id, ImageService $imageService)
     {
         $skill = Skill::find($id);
-        Storage::disk('s3')->delete('storage/skill-images/' . $skill->skill_img);
+        $imageService->deleteFromS3('storage/skill-images/', $skill->skill_img);
         $skill->delete();
         return redirect(route('skill.index'));
     }

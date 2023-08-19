@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\SEO;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class SEOController extends Controller
 {
@@ -15,7 +14,7 @@ class SEOController extends Controller
         session()->flash('message', 'Welcome to SEO');
         return view('admin.seo.index', compact('seo'));
     }
-    public function update(Request $request)
+    public function update(Request $request, ImageService $imageService)
     {
         $data = $request->all();
         $seo = SEO::first();
@@ -102,14 +101,10 @@ class SEOController extends Controller
 
         if ($request->hasFile('main_image')) {
             $oldImage = $seo->main_image;
-            $filename = 'main_image' . uniqid() . strtolower(Str::random(5)) . '.' . $data['main_image']->extension();
-            $path = $request->file('main_image')->storeAs('storage/main_image/', $filename, 's3');
-            Storage::disk('s3')->setVisibility($path, 'public');
+            $filename = $imageService->storeImage($request->file('main_image'), 'storage/main_image/', $oldImage);
             $seo->forceFill([
                 'main_image' => $filename
             ])->save();
-
-            Storage::disk('s3')->delete('storage/main_image/' . $oldImage);
         }
 
         $seo = SEO::first();

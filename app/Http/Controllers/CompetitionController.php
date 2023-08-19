@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Competition;
 use App\Models\SEO;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class CompetitionController extends Controller
 {
@@ -21,7 +20,7 @@ class CompetitionController extends Controller
         return view('admin.competition.index', compact('competitions'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, ImageService $imageService)
     {
         try {
             $this->validate(request(), [
@@ -37,9 +36,7 @@ class CompetitionController extends Controller
                 $compt->link = $request->link;
                 $compt->date = $request->date;
 
-                $filename = 'competition' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
-                $path = $request->file('image')->storeAs('storage/competition-images/', $filename, 's3');
-                Storage::disk('s3')->setVisibility($path, 'public');
+                $filename = $imageService->storeImage($request->file('image'), 'storage/competition-images/');
                 $compt->image = $filename;
 
                 $compt->save();
@@ -57,7 +54,7 @@ class CompetitionController extends Controller
             return $th->getMessage();
         }
     }
-    public function update(Request $request, Competition $competition)
+    public function update(Request $request, Competition $competition, ImageService $imageService)
     {
         try {
             $this->validate(request(), [
@@ -73,11 +70,8 @@ class CompetitionController extends Controller
 
             if ($request->hasFile('image')) {
                 $oldImage = $competition->image;
-                $filename = 'competition' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
-                $path = $request->file('image')->storeAs('storage/competition-images/', $filename, 's3');
-                Storage::disk('s3')->setVisibility($path, 'public');
+                $filename = $imageService->storeImage($request->file('image'), 'storage/competition-images/', $oldImage);
                 $competition->image = $filename;
-                Storage::disk('s3')->delete('storage/competition-images/' . $oldImage);
             }
 
             $competition->save();
@@ -97,9 +91,9 @@ class CompetitionController extends Controller
 
 
 
-    public function destroy(Competition $competition)
+    public function destroy(Competition $competition, ImageService $imageService)
     {
-        Storage::disk('s3')->delete('storage/competition-images/' . $competition->image);
+        $imageService->deleteFromS3('storage/competition-images/',  $competition->image);
         $competition->delete();
         $seo = SEO::first();
         $competitionCount = Competition::count();

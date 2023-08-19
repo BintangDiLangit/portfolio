@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Certificate;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -18,7 +19,7 @@ class CertificateController extends Controller
     {
         return view('admin.certificate.create');
     }
-    public function store(Request $request)
+    public function store(Request $request, ImageService $imageService)
     {
         $this->validate(request(), [
             'name' => 'required|string|max:100|min:5',
@@ -31,10 +32,7 @@ class CertificateController extends Controller
             $crt->name = $request->name;
             $crt->linkCert = $request->linkCert;
             $crt->type = $request->type;
-
-            $filename = 'cert' . uniqid() . strtolower(Str::random(10)) . '.' . $request->imgCert->extension();
-            $path = $request->file('imgCert')->storeAs('storage/certificate-images/', $filename, 's3');
-            Storage::disk('s3')->setVisibility($path, 'public');
+            $filename = $imageService->storeImage($request->file('imgCert'), 'storage/certificate-images/');
             $crt->imgCert = $filename;
 
             $crt->save();
@@ -48,7 +46,7 @@ class CertificateController extends Controller
         $cert = Certificate::where('id', $id)->first();
         return view('admin.certificate.edit', compact('cert'));
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, ImageService $imageService)
     {
         $this->validate(request(), [
             'name' => 'required|string|max:100|min:5',
@@ -62,20 +60,17 @@ class CertificateController extends Controller
         $crt->type = $request->type;
         if ($request->hasFile('imgCert')) {
             $oldImage = $crt->imgCert;
-            $filename = 'cert' . uniqid() . strtolower(Str::random(10)) . '.' . $request->imgCert->extension();
-            $path = $request->file('imgCert')->storeAs('storage/certificate-images/', $filename, 's3');
-            Storage::disk('s3')->setVisibility($path, 'public');
+            $filename = $imageService->storeImage($request->file('imgCert'), 'storage/certificate-images/', $oldImage);
             $crt->imgCert = $filename;
-            Storage::disk('s3')->delete('storage/certificate-images/' . $oldImage);
         }
         $crt->update();
         session()->flash('message', 'Certificate has been updated');
         return redirect(route('certificate.index'));
     }
-    public function destroy($id)
+    public function destroy($id, ImageService $imageService)
     {
         $certificate = Certificate::find($id);
-        Storage::disk('s3')->delete('storage/certificate-images/' . $certificate->imgCert);
+        $imageService->deleteFromS3('storage/certificate-images/', $certificate->imgCert);
         $certificate->delete();
         return redirect(route('certificate.index'));
     }

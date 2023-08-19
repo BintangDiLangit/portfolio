@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\SEO;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class ClientController extends Controller
 {
@@ -19,7 +18,7 @@ class ClientController extends Controller
     {
         return view('admin.client.create');
     }
-    public function store(Request $request)
+    public function store(Request $request, ImageService $imageService)
     {
         $this->validate(request(), [
             'name' => 'required|string|max:100|min:5',
@@ -31,9 +30,7 @@ class ClientController extends Controller
             $cli->name = $request->name;
             $cli->clientMessage = $request->clientMessage;
 
-            $filename = 'client_image' . uniqid() . strtolower(Str::random(10)) . '.' . $request->photo->extension();
-            $path = $request->file('photo')->storeAs('storage/client-images/', $filename, 's3');
-            Storage::disk('s3')->setVisibility($path, 'public');
+            $filename = $imageService->storeImage($request->file('photo'), 'storage/client-images/');
             $cli->photo = $filename;
 
             $cli->save();
@@ -53,7 +50,7 @@ class ClientController extends Controller
         $client = Client::where('id', $id)->first();
         return view('admin.client.edit', compact('client'));
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, ImageService $imageService)
     {
         $this->validate(request(), [
             'name' => 'required|string|max:100|min:5',
@@ -65,21 +62,17 @@ class ClientController extends Controller
             $oldPhoto = $cli->photo;
             $cli->name = $request->name;
             $cli->clientMessage = $request->clientMessage;
-            $filename = 'client_image' . uniqid() . strtolower(Str::random(10)) . '.' . $request->photo->extension();
-            $path = $request->file('photo')->storeAs('storage/client-images/', $filename, 's3');
-            Storage::disk('s3')->setVisibility($path, 'public');
+            $filename = $imageService->storeImage($request->file('photo'), 'storage/client-images/', $oldPhoto);
             $cli->photo = $filename;
             $cli->save();
-
-            Storage::disk('s3')->delete('storage/client-images/' . $oldPhoto);
         }
         session()->flash('message', 'Client has been updated');
         return redirect(route('client.index'));
     }
-    public function destroy($id)
+    public function destroy($id, ImageService $imageService)
     {
         $client = Client::find($id);
-        Storage::disk('s3')->delete('storage/client-images/' . $client->photo);
+        $imageService->deleteFromS3('storage/client-images/', $client->photo);
         $client->delete();
         $seo = SEO::first();
         $client = Client::count();

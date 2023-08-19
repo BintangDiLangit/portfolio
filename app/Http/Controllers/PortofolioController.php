@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Portofolio;
 use App\Models\SEO;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use App\Services\ImageService;
 
 class PortofolioController extends Controller
 {
@@ -19,7 +18,7 @@ class PortofolioController extends Controller
     {
         return view('admin.portofolio.create');
     }
-    public function store(Request $request)
+    public function store(Request $request, ImageService $imageService)
     {
         $this->validate(request(), [
             'title' => 'required|string|max:255|min:1',
@@ -39,9 +38,8 @@ class PortofolioController extends Controller
             $prt->client = $request->client;
             $prt->linkPorto = $request->linkPorto;
 
-            $filename = 'portfolio' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
-            $path = $request->file('image')->storeAs('storage/portofolio-images/', $filename, 's3');
-            Storage::disk('s3')->setVisibility($path, 'public');
+            $filename = $imageService->storeImage($request->file('image'), 'storage/portofolio-images/');
+
             $prt->image = $filename;
 
             $prt->additional_description = $request->additional_description;
@@ -68,7 +66,7 @@ class PortofolioController extends Controller
         $porto = Portofolio::where('id', $id)->first();
         return view('admin.portofolio.edit', compact('porto'));
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, ImageService $imageService)
     {
         $this->validate(request(), [
             'title' => 'required|string|max:255|min:1',
@@ -87,14 +85,10 @@ class PortofolioController extends Controller
         $prt->client = $request->client;
         $prt->linkPorto = $request->linkPorto;
         if ($request->hasFile('image')) {
+
             $oldImage = $prt->image;
-
-            $filename = 'portfolio' . uniqid() . strtolower(Str::random(10)) . '.' . $request->image->extension();
-            $path = $request->file('image')->storeAs('storage/portofolio-images/', $filename, 's3');
-            Storage::disk('s3')->setVisibility($path, 'public');
+            $filename = $imageService->storeImage($request->file('image'), 'storage/portofolio-images/', $oldImage);
             $prt->image = $filename;
-
-            Storage::disk('s3')->delete('storage/portofolio-images/' . $oldImage);
         }
         $prt->additional_description = $request->additional_description;
         if ($request->completed == null) {
@@ -108,10 +102,10 @@ class PortofolioController extends Controller
         return redirect(route('portofolio.index'));
     }
 
-    public function destroy($id)
+    public function destroy($id, ImageService $imageService)
     {
         $portofolio = Portofolio::find($id);
-        Storage::disk('s3')->delete('storage/portofolio-images/' . $portofolio->image);
+        $imageService->deleteFromS3('storage/portofolio-images/', $portofolio->image);
         $portofolio->delete();
         $seo = SEO::first();
         $portfolio = Portofolio::count();
