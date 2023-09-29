@@ -1,6 +1,10 @@
 @section('title')
     Edit Blog
 @endsection
+@section('head')
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+@endsection
 <x-app-layout>
     @push('head_script')
         <script src="https://cdn.tiny.cloud/1/oa8jmz8jvqz4wjrgj18i7em5pbidibl49aqwfx0lii7m4tuc/tinymce/5/tinymce.min.js"
@@ -59,7 +63,24 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea rows="50" name="content" class="form-control my-editor">{!! old('content', $blog->content ?? '') !!}</textarea>
+                            <h4>Block Content *</h4>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <a id="lfm" data-input="thumbnail" data-preview="holder"
+                                            class="btn btn-secondary text-white">
+                                            <i class="fa fa-picture-o"></i> Insert Image
+                                        </a>
+                                    </span>
+                                    <input id="thumbnail" class="form-control" type="hidden" name="filepath">
+                                </div>
+                                <img id="holder" style="margin-top:15px;max-height:100px;">
+
+                                <textarea id="block_content" name="content" rows="10" cols="80" style="width: 100%">{!! old('content', $blog->content ?? '') !!}</textarea>
+                                @if ($errors->has('block_content'))
+                                    <span class="form-feedback">{{ $errors->first('block_content') }}</span>
+                                @endif
+                            </div>
                         </div>
                         <div class="form-group">
                             @if ($blog->tags() == null)
@@ -80,6 +101,43 @@
     </div>
 
     @push('bot_script')
+        <script src="{{ url('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
+        <script>
+            $(function() {
+                $('.select2multiple').select2({
+                    theme: 'bootstrap4',
+                    tags: true
+                });
+            });
+
+            $(document).ready(function() {
+                var route_prefix = '{{ url('/filemanager') }}';
+                $('#lfm').filemanager('image', {
+                    prefix: route_prefix
+                });
+
+                $('#thumbnail').change(function() {
+
+                    var cursorPos = $('#block_content').prop('selectionStart');
+                    var v = $('#block_content').val();
+                    var textBefore = v.substring(0, cursorPos);
+                    var textAfter = v.substring(cursorPos, v.length);
+
+                    console.log(textBefore + '<img src="' + $(this).val() + '" />' + textAfter);
+
+                    // Get the TinyMCE editor object.
+                    const editor = tinymce.get('block_content');
+
+                    // Insert the value "Hello world!" into the editor at the current cursor position.
+                    editor.execCommand('mceInsertContent', false, '<img src="' + $(this).val() + '" />', {
+                        insertAt: 'cursor'
+                    });
+
+                    // $('#block_content').val(textBefore + '<img src="' + $(this).val() + '" />' + textAfter);
+                });
+            });
+        </script>
+
         <script>
             var editor_config = {
                 path_absolute: "/",
