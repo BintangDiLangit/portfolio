@@ -39,7 +39,7 @@
                                 <span class="text-red-500">{{ $message }}</span>
                             @enderror
                             <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-                            <img src="{{ env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/storage/blog-images/' . $blog->imageHeader }}"
+                            <img src="{{ env('AWS_URL') . '/' . env('AWS_BUCKET') . '/storage/blog-images/' . $blog->imageHeader }}"
                                 class="rounded mx-auto d-block" style="width: 300px" alt="...">
                             <div class="file-upload">
                                 <button class="file-upload-btn" type="button"

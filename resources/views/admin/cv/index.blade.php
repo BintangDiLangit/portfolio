@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="container m-4">
-                    <iframe src="{{ env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/storage/file-cv/' . $cv->path }}"
+                    <iframe src="{{ env('AWS_URL') . '/' . env('AWS_BUCKET') . '/storage/file-cv/' . $cv->path }}"
                         style="width: 100%;height: 1000px;border: none;">CV</iframe>
                 </div>
             </div>

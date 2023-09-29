@@ -33,7 +33,7 @@
                                 </td>
                                 <td>
                                     <img style="width: 250px"
-                                        src="{{ env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/storage/portofolio-images/' . $porto->image }}">
+                                        src="{{ env('AWS_URL') . '/' . env('AWS_BUCKET') . '/storage/portofolio-images/' . $porto->image }}">
                                 </td>
                                 <td>
                                     <a href="{{ route('portofolio.edit', ['portofolio' => $porto]) }}"
