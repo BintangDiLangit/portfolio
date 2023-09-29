@@ -8,7 +8,7 @@
 <x-app-layout>
     @push('head_script')
         <script src="https://cdn.tiny.cloud/1/oa8jmz8jvqz4wjrgj18i7em5pbidibl49aqwfx0lii7m4tuc/tinymce/5/tinymce.min.js"
-                referrerpolicy="origin"></script>
+            referrerpolicy="origin"></script>
     @endpush
 
     <x-slot name="header">
@@ -28,7 +28,9 @@
                             <label for="exampleFormControlInput1">Title</label>
                             <input type="text" name="title" class="form-control" id="exampleFormControlInput1"
                                 placeholder="title" value="{{ old('title') }}">
-                            @error('title') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('title')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Upload Image Header</label>
@@ -55,14 +57,34 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>
+                            <h4>Block Content *</h4>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <a id="lfm" data-input="thumbnail" data-preview="holder"
+                                            class="btn btn-secondary text-white">
+                                            <i class="fa fa-picture-o"></i> Insert Image
+                                        </a>
+                                    </span>
+                                    <input id="thumbnail" class="form-control" type="hidden" name="filepath">
+                                </div>
+                                <img id="holder" style="margin-top:15px;max-height:100px;">
+
+                                <textarea id="block_content" name="content" rows="10" cols="80" style="width: 100%">{!! old('content', $content ?? '') !!}</textarea>
+                                @if ($errors->has('block_content'))
+                                    <span class="form-feedback">{{ $errors->first('block_content') }}</span>
+                                @endif
+                            </div>
                         </div>
+                        {{-- <div class="form-group">
+
+                            <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>
+                        </div> --}}
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Tags</label>
                             <select class="select2multiple form-control" name="tags[]" multiple="multiple">
                                 @for ($i = 0; $i < count($tags); $i++)
                                     <option value="{{ $tags[$i]->tag_name }}">{{ $tags[$i]->tag_name }}</option>
-
                                 @endfor
                             </select>
                         </div>
@@ -75,11 +97,39 @@
     </div>
 
     @push('bot_script')
+        <script src="{{ url('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
         <script>
             $(function() {
                 $('.select2multiple').select2({
                     theme: 'bootstrap4',
                     tags: true
+                });
+            });
+
+            $(document).ready(function() {
+                var route_prefix = '{{ url('/filemanager') }}';
+                $('#lfm').filemanager('image', {
+                    prefix: route_prefix
+                });
+
+                $('#thumbnail').change(function() {
+
+                    var cursorPos = $('#block_content').prop('selectionStart');
+                    var v = $('#block_content').val();
+                    var textBefore = v.substring(0, cursorPos);
+                    var textAfter = v.substring(cursorPos, v.length);
+
+                    console.log(textBefore + '<img src="' + $(this).val() + '" />' + textAfter);
+
+                    // Get the TinyMCE editor object.
+                    const editor = tinymce.get('block_content');
+
+                    // Insert the value "Hello world!" into the editor at the current cursor position.
+                    editor.execCommand('mceInsertContent', false, '<img src="' + $(this).val() + '" />', {
+                        insertAt: 'cursor'
+                    });
+
+                    // $('#block_content').val(textBefore + '<img src="' + $(this).val() + '" />' + textAfter);
                 });
             });
         </script>
@@ -117,14 +167,14 @@
         <script>
             var editor_config = {
                 path_absolute: "/",
-                selector: "textarea.my-editor",
+                selector: "#block_content",
                 plugins: [
                     "advlist autolink lists link image charmap print preview hr anchor pagebreak",
                     "searchreplace wordcount visualblocks visualchars code fullscreen",
                     "insertdatetime media nonbreaking save table contextmenu directionality",
                     "emoticons template paste textcolor colorpicker textpattern"
                 ],
-                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+                toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
                 relative_urls: false,
 
                 image_title: true,
