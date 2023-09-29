@@ -29,7 +29,7 @@
                                 <td> {{ $cli->clientMessage }} </td>
                                 <td>
                                     <img style="width: 100px"
-                                        src="{{ env('AWS_URL') . '/' . env('AWS_BUCKET') . '/storage/client-images/' . $cli->photo }}">
+                                        src="{{ env('AWS_URL') . '/storage/client-images/' . $cli->photo }}">
                                 </td>
                                 <td>
                                     <a href="{{ route('client.edit', ['client' => $cli]) }}" class="btn btn-primary"><i

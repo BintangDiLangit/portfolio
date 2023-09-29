@@ -103,7 +103,7 @@
                                 </td>
                                 <td>
                                     <img style="width: 250px"
-                                        src="{{ env('AWS_URL') . '/' . env('AWS_BUCKET') . '/storage/competition-images/' . $comp->image }}">
+                                        src="{{ env('AWS_URL') . '/storage/competition-images/' . $comp->image }}">
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-success" data-toggle="modal"
