@@ -4,7 +4,7 @@
 <x-app-layout>
     @push('head_script')
         <script src="https://cdn.tiny.cloud/1/oa8jmz8jvqz4wjrgj18i7em5pbidibl49aqwfx0lii7m4tuc/tinymce/5/tinymce.min.js"
-                referrerpolicy="origin"></script>
+            referrerpolicy="origin"></script>
     @endpush
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -25,13 +25,17 @@
                                     are not allowed)</span></label>
                             <input type="text" name="title" class="form-control" id="exampleFormControlInput1"
                                 placeholder="title" value="{{ $blog->title }}">
-                            @error('title') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('title')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Upload Image Header</label>
-                            @error('imageHeader') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('imageHeader')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                             <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-                            <img src="{{ asset('../blog-images/' . $blog->imageHeader) }}"
+                            <img src="{{ env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/storage/blog-images/' . $blog->imageHeader }}"
                                 class="rounded mx-auto d-block" style="width: 300px" alt="...">
                             <div class="file-upload">
                                 <button class="file-upload-btn" type="button"
@@ -48,15 +52,14 @@
                                 <div class="file-upload-content">
                                     <img class="file-upload-image" src="#" alt="your image" />
                                     <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
-                                                class="image-title">Uploaded Image</span></button>
+                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove
+                                            <span class="image-title">Uploaded Image</span></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea rows="50" name="content"
-                                class="form-control my-editor">{!! old('content', $blog->content ?? '') !!}</textarea>
+                            <textarea rows="50" name="content" class="form-control my-editor">{!! old('content', $blog->content ?? '') !!}</textarea>
                         </div>
                         <div class="form-group">
                             @if ($blog->tags() == null)

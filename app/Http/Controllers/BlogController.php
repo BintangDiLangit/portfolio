@@ -7,6 +7,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Services\ImageService;
 
 class BlogController extends Controller
 {
@@ -23,7 +24,7 @@ class BlogController extends Controller
         return view('admin.blog.create', compact('tags'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, ImageService $imageService)
     {
         $this->validate(request(), [
             'title'    => 'required|string|max:255',
@@ -62,8 +63,8 @@ class BlogController extends Controller
             $blg->user_id = Auth::user()->id;
             $blg->link_route = $c;
 
-            $filename = 'blog_img' . uniqid() . strtolower(Str::random(10)) . '.' . $request->imageHeader->extension();
-            $request->file('imageHeader')->move('blog-images/', $filename);
+            $filename = $imageService->storeImage($request->file('imageHeader'), 'storage/blog-images/');
+
             $blg->imageHeader = $filename;
             if ($blg->save()) {
                 $blg->tags()->attach($tag_ids);
@@ -79,7 +80,7 @@ class BlogController extends Controller
         return view('admin.blog.edit', compact('blog'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, ImageService $imageService)
     {
         $this->validate(request(), [
             'title'    => 'required|string|max:255',
@@ -95,8 +96,7 @@ class BlogController extends Controller
         $blg->link_route = $c;
         $blg->content = $request->content;
         if ($request->hasFile('imageHeader')) {
-            $filename = 'blog_img' . uniqid() . strtolower(Str::random(10)) . '.' . $request->imageHeader->extension();
-            $request->file('imageHeader')->move('blog-images/', $filename);
+            $filename = $imageService->storeImage($request->file('imageHeader'), 'storage/blog-images/');
             $blg->imageHeader = $filename;
         }
         $blg->update();
