@@ -141,7 +141,7 @@
         <script>
             var editor_config = {
                 path_absolute: "/",
-                selector: "textarea.my-editor",
+                selector: "#block_content",
                 plugins: [
                     "advlist autolink lists link image charmap print preview hr anchor pagebreak",
                     "searchreplace wordcount visualblocks visualchars code fullscreen",
