@@ -33,7 +33,7 @@
                                 <td> {{ $skill->updated_at }} </td>
                                 <td>
                                     <img style="width: 100px"
-                                        src="{{ env('AWS_URL') . '/storage/skill-images/' . $skill->skill_img }}">
+                                        src="{{ env('IMAGE_URL') . '/storage/skill-images/' . $skill->skill_img }}">
                                 </td>
                                 <td> {{ $skill->skill_desc }} </td>
                                 <td>

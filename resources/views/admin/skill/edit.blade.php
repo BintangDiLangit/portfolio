@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Upload Image</label>
-                            <img src="{{ env('AWS_URL') . '/storage/skill-images/' . $skill->skill_img }}"
+                            <img src="{{ env('IMAGE_URL') . '/storage/skill-images/' . $skill->skill_img }}"
                                 class="rounded mx-auto d-block" style="width: 200px" alt="...">
                             <input name="skill_img" type="file" class="form-control-file"
                                 id="exampleFormControlFile1">

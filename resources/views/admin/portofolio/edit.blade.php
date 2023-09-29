@@ -51,7 +51,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Upload Image</label>
-                            <img src="{{ env('AWS_URL') . '/storage/portofolio-images/' . $porto->image }}"
+                            <img src="{{ env('IMAGE_URL') . '/storage/portofolio-images/' . $porto->image }}"
                                 class="rounded mx-auto d-block" style="width: 300px" alt="...">
                             <input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
 
